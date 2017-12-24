@@ -1,0 +1,16 @@
+{
+  "name": "14_w",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "sequelize": "^4.19.0",
+    "mysql2": "1.4.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

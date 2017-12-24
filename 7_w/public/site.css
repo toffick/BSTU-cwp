@@ -1,0 +1,59 @@
+.author {
+    font-size: 80%;
+    text-align: right;
+    margin: 5px 0 3px 0;
+}
+
+.text {
+    text-align: justify;
+    margin: 5px 0 0 0;
+}
+
+.date {
+    color: grey;
+    font-size: 80%;
+}
+
+.articleId{
+    display: none;
+}
+
+.commentId{
+    display: none;
+}
+
+.sorting {
+    display: inline-block;
+    margin: 10px;
+}
+
+.add_article {
+    display: inline-block;
+    float: right;
+    margin: 10px;
+}
+
+.form-control {
+    width: 10%;
+}
+
+.main_form {
+    padding: 15px 0 0 0;
+}
+
+.delete_article{
+    margin: 10px;
+}
+
+.comment{
+    padding: 15px;
+    margin: 0 0 5px 15px;
+    background: lightgrey;
+    border-radius: 7px;
+}
+
+.comment__form{
+    padding: 10px;
+    margin: 0 0 5px 15px;
+    background: lightgrey;
+}

@@ -1,0 +1,10 @@
+h1 Countries / #{pagination.first} - #{pagination.last}
+br
+ul
+    for item in countries
+        li
+            a(href=`/countries/${item.Code}.html`) #{item.Name}, #{item.Code}
+
+- for (var x = 1; x <= pages; x++)
+   a(href=`/countries.html?page=${x}` style={margin: '0 5 0 5', color: pagination.page === x ? 'red' : 'black'}) #{x}
+

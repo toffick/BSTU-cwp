@@ -1,0 +1,34 @@
+[
+	{
+		"name": "Энтони Хопкинс",
+		"birth": "1948-11-10",
+		"filmsNumber": 239,
+		"liked": 6492,
+		"photo": "https://st.kp.yandex.net/images/actor_iphone/iphone360_8968.jpg",
+		"position": 0
+	},
+	{
+		"name": "Сэмюэл Л. Джексон",
+		"birth": "21 декабря 1948",
+		"filmsNumber": 357,
+		"liked": 4864,
+		"photo": "https://st.kp.yandex.net/images/actor_iphone/iphone360_7164.jpg",
+		"position": 1
+	},
+	{
+		"name": "Джаред Лето",
+		"birth": "1 июня 1970",
+		"filmsNumber": 1,
+		"liked": 829,
+		"photo": "link to photo",
+		"position": 2
+	},
+	{
+		"name": "Морган ",
+		"birth": "1 июня 1937",
+		"filmsNumber": 2,
+		"liked": 0,
+		"photo": "https://st.kp.yandex.net/images/actor_iphone/iphone360_6750.jpg",
+		"position": 3
+	}
+]

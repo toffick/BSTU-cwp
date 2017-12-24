@@ -1,0 +1,14 @@
+{
+  "request_invalid": {
+    "code": 400,
+    "message": "Request invalid"
+  },
+  "article_not_found": {
+    "code": 404,
+    "message": "Article not found"
+  },
+  "not_found": {
+    "code": 404,
+    "message": "Page not found"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Mozzarella",
+    "description": "The best",
+    "calories": 265.00
+  },
+  {
+    "name": "Marinara",
+    "description": "This is a traditional Neapolitan pizza that is made with lots of garlic, anchovies and oregano.",
+    "calories": 305.00
+  },
+  {
+    "name": "Capricciosa",
+    "description": "This pizza is topped with olives, artichoke hearts, half of a boiled egg, prosciutto and mushrooms.",
+    "calories": 3001.85
+  },
+  {
+    "name": "Focaccia",
+    "description": "This is the pizza that is most like the earliest pizzas. It is created without using cheese or tomatoes but is covered in caramelized onions, olive oil and savory toppings.",
+    "calories": 256.00
+  }
+]

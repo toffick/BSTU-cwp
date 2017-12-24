@@ -1,0 +1,16 @@
+{
+  "name": "19_w",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "body-parser": "^1.18.2",
+    "joi": "^13.0.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

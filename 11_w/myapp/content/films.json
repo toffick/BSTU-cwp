@@ -1,0 +1,132 @@
+[
+	{
+		"title": "Не зеленая миляq",
+		"rating": "10",
+		"year": 2005,
+		"budget": 55000000,
+		"gross": 677386686,
+		"poster": "https://st.kp.yandex.net/images/film_big/448.jpg",
+		"position": 0,
+		"id": 1508677265879
+	},
+	{
+		"title": "Слоны",
+		"rating": "9",
+		"year": 2001,
+		"budget": 55000,
+		"gross": 6776686,
+		"poster": "https://st.kp.yandex.net/images/film_big/448.jpg",
+		"position": 1,
+		"id": 1509183287263
+	},
+	{
+		"title": "Слоны",
+		"rating": "9",
+		"year": 2001,
+		"budget": 55000,
+		"gross": 6776686,
+		"poster": "https://st.kp.yandex.net/images/film_big/448.jpg",
+		"position": 2,
+		"id": 1509183274933
+	},
+	{
+		"title": "Слоны",
+		"rating": "9",
+		"year": 2001,
+		"budget": 55000,
+		"gross": 6776686,
+		"poster": "https://st.kp.yandex.net/images/film_big/448.jpg",
+		"position": 3,
+		"id": 1509183285411
+	},
+	{
+		"title": "Слоны",
+		"rating": "9",
+		"year": 2001,
+		"budget": 55000,
+		"gross": 6776686,
+		"poster": "https://st.kp.yandex.net/images/film_big/448.jpg",
+		"position": 4,
+		"id": 1509183286589
+	},
+	{
+		"title": "Список Шиндлера",
+		"rating": "8.816",
+		"year": 1993,
+		"budget": 22000000,
+		"gross": 321265768,
+		"poster": "https://st.kp.yandex.net/images/film_big/329.jpg",
+		"position": 5,
+		"id": 1508677270494
+	},
+	{
+		"title": "1+1",
+		"rating": "8.812",
+		"year": 2011,
+		"budget": 9500000,
+		"gross": 426588510,
+		"poster": "https://st.kp.yandex.net/images/film_big/535341.jpg",
+		"position": 6,
+		"id": 1508677275082
+	},
+	{
+		"title": "Король Лев",
+		"rating": "8.775",
+		"year": 1994,
+		"budget": 422783777,
+		"gross": 987483777,
+		"poster": "https://st.kp.yandex.net/images/film_big/2360.jpg",
+		"position": 7,
+		"id": 1508677287232
+	},
+	{
+		"title": "Леон",
+		"rating": "8.684",
+		"year": 1994,
+		"budget": 115000000,
+		"gross": 19501238,
+		"poster": "https://st.kp.yandex.net/images/film_big/389.jpg",
+		"position": 8,
+		"id": 1508677291447
+	},
+	{
+		"title": "Начало",
+		"rating": "8.665",
+		"year": 2010,
+		"budget": 160000000,
+		"gross": 825532764,
+		"poster": "https://st.kp.yandex.net/images/film_big/447301.jpg",
+		"position": 9,
+		"id": 1508677283182
+	},
+	{
+		"title": "Бойцовский клуб",
+		"rating": "8.656",
+		"year": 1999,
+		"budget": 63000000,
+		"gross": 37030102,
+		"poster": "https://st.kp.yandex.net/images/film_big/361.jpg",
+		"position": 10,
+		"id": 1508677296383
+	},
+	{
+		"title": "Тор",
+		"rating": "8.102",
+		"year": 2011,
+		"budget": 200000000,
+		"gross": 470000000,
+		"poster": "https://st.kp.yandex.net/images/film_big/42664.jpg",
+		"position": 11,
+		"id": 1508737289072
+	},
+	{
+		"title": "Не зеленая миля",
+		"rating": "8",
+		"year": 1999,
+		"budget": 60000000,
+		"gross": 286801374,
+		"poster": "https://st.kp.yandex.net/images/film_big/435.jpg",
+		"position": 12,
+		"id": 1508736279151
+	}
+]

@@ -1,0 +1,22 @@
+{
+  "name": "cwp-18",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js"
+  },
+  "dependencies": {
+    "moment": "^2.19.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "babel":{
+    "presets": ["es2015"]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

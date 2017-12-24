@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Two katanas",
+    "dps": 156,
+    "ownerId": 1
+  },
+  {
+    "name": "bo-staff",
+    "dps": 90,
+    "ownerId": 3
+  },
+  {
+    "name": "sais",
+    "dps": 120,
+    "ownerId": 2
+  },
+  {
+    "name": "nunchucks",
+    "dps": 140,
+    "ownerId": 4
+  }
+]

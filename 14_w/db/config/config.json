@@ -1,0 +1,14 @@
+{
+  "database": "cwp-14",
+  "user": "root",
+  "pass": "root",
+  "options": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "define": {
+      "timestamps": true,
+      "paranoid": true
+    },
+    "logging": false
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "ВАЗ 2103",
+    "fleetId": 1
+  },
+  {
+    "name": "VW Golf",
+    "fleetId": 2
+  },
+  {
+    "name": "Ford F-Series",
+    "fleetId": 3
+  },
+  {
+    "name": "Chevrolet Silverado",
+    "fleetId": 2
+  },
+  {
+    "name": "Toyota Camry",
+    "fleetId": 1
+  },
+  {
+    "name": "Dodge Ram",
+    "fleetId": 3
+  },
+  {
+    "name": "Honda Accord",
+    "fleetId": 1
+  },
+  {
+    "name": "Honda Civic",
+    "fleetId": 1
+  }
+]

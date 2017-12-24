@@ -1,0 +1,29 @@
+div Code: #{country.Code}
+div Name: #{country.Name}
+div Continent: #{country.Continent}
+div Region: #{country.Region}
+div SurfaceArea: #{country.SurfaceArea}
+div IndepYear: #{country.IndepYear}
+div Population: #{country.Population}
+div LifeExpectancy: #{country.LifeExpectancy}
+div GNP: #{country.GNP}
+div GNPOld: #{country.GNPOld}
+div LocalName: #{country.LocalName}
+div GovernmentForm: #{country.GovernmentForm}
+div HeadOfState: #{country.HeadOfState}
+div Capital: #{country.Capital}
+div Code2: #{country.Code2}
+br
+div Cities value is
+    b #{citiesCount}
+br
+div The capital of #{country.Name} is
+    a(href=`/cities/${Capital.ID}.html`) #{Capital.Name}
+br
+each city in threeCities
+    a(href=`/cities/${city.ID}.html`) #{city.Name} #{city.Population}
+        br
+br
+each language in languages
+   p Name: #{language.name} percentage: #{language.percentage} speakersCount: #{language.speakersCount} isOfficial: #{language.isOfficial}
+    br

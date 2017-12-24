@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "tracking",
+    "user": "root",
+    "pass": "root",
+    "options": {
+      "dialect": "mysql",
+      "host": "localhost",
+      "define": {
+        "timestamps": true,
+        "paranoid": true
+      },
+      "logging": false
+    }
+  }
+}

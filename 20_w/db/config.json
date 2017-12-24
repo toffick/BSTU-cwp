@@ -1,0 +1,17 @@
+{
+  "db": {
+    "name": "world",
+    "user": "root",
+    "pass": "root",
+    "options": {
+      "dialect": "mysql",
+      "host": "localhost",
+      "define": {
+        "timestamps": false,
+        "paranoid": false,
+        "freezeTableName": true
+      },
+      "logging": false
+    }
+  }
+}

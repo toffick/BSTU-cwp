@@ -1,0 +1,12 @@
+{
+  "db": {
+    "name": "cwp-12",
+    "user": "root",
+    "pass": "root",
+    "options":
+    {
+      "dialect": "mysql",
+      "host": "localhost"
+    }
+  }
+}
