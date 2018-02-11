@@ -1,15 +1,13 @@
 const Sequelize = require('sequelize');
-
 const config = require('./config.json');
 
 const db = require('./context')(Sequelize, config);
-const server = require('./server')(db, config);
+const server = require('./AppManager')(db, config);
+const tempDataToDb = require('./helpers/tempDataToDb');
 
 (async function () {
-    await db.sequelize.sync();
+    await db.sequelize.sync({force: true});
+    await tempDataToDb(db);
 
-    await db.roles.findOrCreate({ where: { name: 'adminstrator' } });
-    await db.roles.findOrCreate({ where: { name: 'user' } });
-
-    server.listen(3000, () => console.log('Running'));
+    server.listen(config.app.port, () => console.log('Running'));
 })();

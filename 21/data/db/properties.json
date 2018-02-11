@@ -1,0 +1,86 @@
+[
+  {
+    "price": 2193,
+    "currency": "BYN",
+    "heading": "Accounting",
+    "location": "71 Dottie Court",
+    "agentId": 2
+  },
+  {
+    "price": 2832,
+    "currency": "BYN",
+    "heading": "Research and Development",
+    "location": "94 La Follette Pass",
+    "agentId": 2
+  },
+  {
+    "price": 7218,
+    "currency": "BYN",
+    "heading": "Human Resources",
+    "location": "8 Hayes Terrace",
+    "agentId": 3
+  },
+  {
+    "price": 7848,
+    "currency": "EUR",
+    "heading": "Marketing",
+    "location": "833 Everett Drive",
+    "agentId": 1
+  },
+  {
+    "price": 4829,
+    "currency": "USD",
+    "heading": "Support",
+    "location": "17 Luster Road",
+    "agentId": 2
+  },
+  {
+    "price": 5599,
+    "currency": "USD",
+    "heading": "Support",
+    "location": "6 Amoth Point",
+    "agentId": 5
+  },
+  {
+    "price": 3450,
+    "currency": "BYN",
+    "heading": "Support",
+    "location": "211 Basil Terrace",
+    "agentId": 4
+  },
+  {
+    "price": 6968,
+    "currency": "BYN",
+    "heading": "Marketing",
+    "location": "24080 Prairieview Circle",
+    "agentId": 3
+  },
+  {
+    "price": 2110,
+    "currency": "USD",
+    "heading": "Engineering",
+    "location": "4 Dunning Court",
+    "agentId": 4
+  },
+  {
+    "price": 5067,
+    "currency": "BYN",
+    "heading": "Business Development",
+    "location": "4285 Cascade Circle",
+    "agentId": 5
+  },
+  {
+    "price": 3830,
+    "currency": "EUR",
+    "heading": "Training",
+    "location": "4 Emmet Place",
+    "agentId": 1
+  },
+  {
+    "price": 4881,
+    "currency": "BYN",
+    "heading": "Support",
+    "location": "038 Mendota Center",
+    "agentId": 2
+  }
+]

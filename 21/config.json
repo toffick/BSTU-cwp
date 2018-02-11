@@ -1,9 +1,21 @@
 {
+  "app": {
+    "port": 9001
+  },
   "db": {
-    "host": "127.0.0.1",
-    "name": "my_db",
-    "user": "myuser",
-    "password": "123#qwe"
+    "name": "cwp-21",
+    "user": "root",
+    "pass": "root",
+    "options": {
+      "dialect": "mysql",
+      "host": "localhost",
+      "define": {
+        "timestamps": false,
+        "paranoid": false,
+        "freezeTableName": true
+      },
+      "logging": false
+    }
   },
   "cookie": {
     "key": "secret key",

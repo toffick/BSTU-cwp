@@ -32,5 +32,22 @@ module.exports = {
         message: 'Access denied',
         code: 'access_denied',
         status: 403
+    },
+    invalidData: {
+        message: 'Invalid input data',
+        code: 'validate_error',
+        status: 400
+    },
+    emptyData:{
+        message: 'Empty input data',
+        code: 'empty_data',
+        status: 400
+    },
+    validError: (msg)=>{
+        return {
+            message: msg,
+            code: 'validate_error',
+            status: 400
+        }
     }
 };

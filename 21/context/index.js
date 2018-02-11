@@ -1,33 +1,21 @@
 module.exports = (Sequelize, config) => {
-    const options = {
-        host: config.db.host,
-        dialect: 'mysql',
-        logging: false,
-        define: {
-            timestamps: true,
-            paranoid: true,
-        }
-    };
 
-    const sequelize = new Sequelize(config.db.name, config.db.user, config.db.password, options);
+    const sequelize = new Sequelize(config.db.name, config.db.user, config.db.pass, config.db.options);
 
-    const User = require('../models/user')(Sequelize, sequelize);
-    const Role = require('../models/role')(Sequelize, sequelize);
-    const Post = require('../models/post')(Sequelize, sequelize);
+    const Property = require('../models/property')(Sequelize, sequelize);
+    const Offices = require('../models/offices')(Sequelize, sequelize);
+    const Agents = require('../models/agents')(Sequelize, sequelize);
 
-    // User <-> Role
-    User.belongsToMany(Role, { through: 'userRoles' });
-    Role.belongsToMany(User, { through: 'userRoles' });
+    Agents.hasMany(Property, {foreignKey: 'agentId'});
+    Property.belongsTo(Agents, {constraints: false, foreignKey: 'agentId'});
 
-    // Post -> User
-    Post.belongsTo(User);
-    User.hasMany(Post);
+    Offices.hasMany(Agents, {foreignKey: 'officeId'});
+    Agents.belongsTo(Offices, {constraints: false, foreignKey: 'officeId'});
 
     return {
-        users: User,
-        roles: Role,
-        posts: Post,
-
+        properties: Property,
+        offices: Offices,
+        agents: Agents,
         sequelize,
         Sequelize,
     };

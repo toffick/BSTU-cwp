@@ -3,8 +3,9 @@ const express = require('express');
 const wrap = require('../helpers/wrap');
 
 class CrudController {
-    constructor(service) {
+    constructor(service, cacheService) {
         this.service = service;
+        this.cache = cacheService;
 
         this.readAll = this.readAll.bind(this);
         this.read = this.read.bind(this);
@@ -14,24 +15,24 @@ class CrudController {
 
         this.router = express.Router();
         this.routes = {
-            '/': [{ method: 'get', cb: this.readAll }],
-            '/:id': [{ method: 'get', cb: this.read }],
-            '/create': [{ method: 'post', cb: this.create }],
-            '/update': [{ method: 'post', cb: this.update }],
-            '/delete': [{ method: 'post', cb: this.delete }]
+            '/': [{method: 'get', cb: this.readAll}],
+            '/:id': [{method: 'get', cb: this.read}],
+            '/create': [{method: 'post', cb: this.create}],
+            '/update': [{method: 'post', cb: this.update}],
+            '/delete': [{method: 'post', cb: this.delete}]
         };
     }
 
     async readAll(req, res) {
-        res.json(
-            await this.service.readChunk(req.params)
-        );
+        let data = await this.service.readChunk(req.query);
+        this.cache.set(req, data);
+        res.json(data);
     }
 
     async read(req, res) {
-        res.json(
-            await this.service.read(req.params.id)
-        );
+        let data = await this.service.read(req.params.id);
+        this.cache.set(req, data);
+        res.json(data);
     }
 
     async create(req, res) {
