@@ -1,0 +1,14 @@
+{
+  "name": "@toffick/cwp-22-1",
+  "version": "2.0.1",
+  "description": "A test package for labaratory work cwp-22 by Nickolay Borsik",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koko"
+  ],
+  "author": "Nickolay Borsik",
+  "license": "MIT"
+}
