@@ -1,24 +1,21 @@
 const express = require('express');
 
 module.exports = (
-    postsService,
-    usersService,
-    rolesService,
-    authenticationService,
+    propertyService,
+    agentService,
+    officeService,
     cacheService,
     config,
 ) => {
     const router = express.Router();
 
-    const postsController = require('./posts')(postsService, cacheService);
-    const usersController = require('./users')(usersService);
-    const rolesController = require('./roles')(rolesService);
-    const authController = require('./auth')(authenticationService, config);
+    const postsController = require('./agent')(agentService, cacheService);
+    const usersController = require('./office')(officeService, cacheService);
+    const rolesController = require('./property')(propertyService, cacheService);
 
-    router.use('/posts', postsController);
-    router.use('/users', usersController);
-    router.use('/roles', rolesController);
-    router.use('/auth', authController);
+    router.use('/agent', postsController);
+    router.use('/office', usersController);
+    router.use('/property', rolesController);
 
     return router;
 };
