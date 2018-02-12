@@ -1,0 +1,9 @@
+{
+  "name": "mendeleev-master",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mendeleev-stringify": "1.0.0"
+  }
+}
