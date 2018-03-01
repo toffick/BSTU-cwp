@@ -1,0 +1,16 @@
+{
+  "name": "25",
+  "version": "1.0.0",
+  "description": "25 cwp lw",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start1": "node http1.js",
+    "start2": "node http2.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mime": "^2.2.0",
+    "compression": "^1.7.2"
+  }
+}
