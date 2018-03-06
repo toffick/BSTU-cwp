@@ -1,0 +1,24 @@
+{
+  "app": {
+    "port": 9001
+  },
+  "db": {
+    "name": "cwp-26",
+    "user": "root",
+    "pass": "root",
+    "options": {
+      "dialect": "mysql",
+      "host": "localhost",
+      "define": {
+        "timestamps": false,
+        "paranoid": false,
+        "freezeTableName": true
+      },
+      "logging": false
+    }
+  },
+  "cookie": {
+    "key": "secret key",
+    "auth": "__auth_id"
+  }
+}
