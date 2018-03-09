@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import wrap from '../helpers/wrap.helper';
+import wrap from '../../helpers/wrap.helper';
 
-class CrudController {
+export default class CrudController {
   constructor (service, cacheService) {
     this.service = service;
     this.cache = cacheService;
@@ -16,11 +16,13 @@ class CrudController {
     this.routes = {
       '/': [
         {method: 'get', cb: this.readAll},
-        {method: 'post', cb: this.create},
+        {method: 'post', cb: this.create}
+      ],
+      '/:id': [
+        {method: 'get', cb: this.read},
         {method: 'put', cb: this.update},
         {method: 'delete', cb: this.delete}
-      ],
-      '/:id': [{method: 'get', cb: this.read}],
+      ]
     };
   }
 
@@ -44,13 +46,13 @@ class CrudController {
 
   async update (req, res) {
     res.json(
-      await this.service.update(req.body)
+      await this.service.update(req.params.id, req.body)
     );
   }
 
   async delete (req, res) {
     res.json(
-      await this.service.delete(req.body.id)
+      await this.service.delete(req.params.id)
     );
   }
 
@@ -66,5 +68,3 @@ class CrudController {
     });
   }
 }
-
-module.exports = CrudController;

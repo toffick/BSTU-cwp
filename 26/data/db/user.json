@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Nickolai",
+    "email": "Nickolai@com.com",
+    "timezone":  "America/Toronto",
+    "validated": true,
+    "validationToken": "qqqqqqqqqq"
+  },
+  {
+    "name": "Andrea",
+    "email": "Andrea@com.com",
+    "timezone": "Asia/Magadan",
+    "validated": true,
+    "validationToken": "qqqqqqqqqq"
+  },
+  {
+    "name": "Vexasia",
+    "email": "Vexasia@com.com",
+    "timezone": "Africa/Abidjan",
+    "validated": true,
+    "validationToken": "qqqqqqqqqq"
+  }
+]

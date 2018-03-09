@@ -1,21 +1,13 @@
-const express = require('express');
+import {Router} from 'express';
 
-module.exports = (
-  propertyService,
-  agentService,
-  officeService,
-  cacheService,
-  config
-) => {
-  const router = express.Router();
+module.exports = ({
+  userController,
+  teamController
+}) => {
+  const router = Router();
 
-  const postsController = require('./agent')(agentService, cacheService);
-  const usersController = require('./office')(officeService, cacheService);
-  const rolesController = require('./property')(propertyService, cacheService);
-
-  router.use('/agent', postsController);
-  router.use('/office', usersController);
-  router.use('/property', rolesController);
+  router.use('/user', userController.router);
+  router.use('/team', teamController.router);
 
   return router;
 };

@@ -2,7 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import config from 'config';
-//
+import tempDataToDb from './helpers/tempDataToDb.helper';
+
 // const errors = require('./helpers/errors');
 //
 // const {propertySchema, agentSchema, officeSchema} = require('./schemas');
@@ -14,9 +15,8 @@ import config from 'config';
 // const CacheService = require('./services/cache');
 
 export default async (container) => {
-
   await container.resolve('context').sequelize.sync({force: true});
-  // await tempDataToDb(db);
+  await tempDataToDb(container.resolve('context'));
 
   const app = express();
   //
@@ -40,14 +40,15 @@ export default async (container) => {
   // );
   //
   // // Mounting
+  console.log(bodyParser);
   app.use(express.static('public'));
   app.use(cookieParser(config.cookie.key));
   app.use(bodyParser.json());
   //
 
   app.use('/api', container.resolve('loggerGlobal'));
-  // app.use('/api', cache);
-  // app.use('/api', apiController);
+  app.use('/api', container.resolve('cacheGlobal'));
+  app.use('/api', container.resolve('apiController'));
   app.use('/api', container.resolve('errorGlobal'));
 
   return app;

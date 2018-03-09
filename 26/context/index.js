@@ -15,6 +15,9 @@ export default ({Sequelize}) => {
   WorkPeriod.belongsTo(Team, {foreignKey: 'teamId'});
   WorkPeriod.belongsTo(User, {foreignKey: 'userId'});
 
+  User.hasMany(WorkPeriod, {foreignKey: 'userId'});
+  Team.hasMany(WorkPeriod, {foreignKey: 'teamId'});
+
   return {
     Team,
     User,

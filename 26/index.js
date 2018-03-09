@@ -1,4 +1,4 @@
-import di from './di';
+import di from './loader';
 import app from './AppManager';
 import config from 'config';
 

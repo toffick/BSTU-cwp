@@ -1,7 +1,10 @@
+import validator from '../helpers/validator.helper';
+
 export default class CrudService {
-  constructor (repository, errors) {
+  constructor (repository, schema, errors) {
     this.repository = repository;
     this.errors = errors;
+    this.schema = schema;
 
     this.defaults = {
       readChunk: {
@@ -13,14 +16,18 @@ export default class CrudService {
     };
   }
 
-  readChunk (options) {
-    options = Object.assign({}, this.defaults.readChunk, options);
+  readChunk (options, whereConditions) {
+    options = {
+      ...this.defaults.readChunk,
+      ...options
+    };
     let limit = Number(options.limit) || this.defaults.readChunk.limit;
     let offset = Number(options.offset) || this.defaults.readChunk.offset;
-
+    console.log(whereConditions);
     return this.repository.findAll({
-      limit: limit,
-      offset: offset,
+      where: {...whereConditions},
+      limit,
+      offset,
       order: [[options.sortField, options.sortOrder.toUpperCase()]],
       raw: true
     });
@@ -43,12 +50,16 @@ export default class CrudService {
   }
 
   async create (data) {
+    this._validateBySchema(data);
+
     const item = await this.repository.create(data);
 
     return item.get({plain: true});
   }
 
   async update (id, data) {
+    this._validateBySchema(data);
+
     await this.repository.update(data, {where: {id: id}, limit: 1});
 
     return this.read(id);
@@ -56,5 +67,12 @@ export default class CrudService {
 
   async delete (id) {
     return this.repository.destroy({where: {id: id}});
+  }
+
+  _validateBySchema (data) {
+    let validCheck = validator(this.schema, data);
+    if (!validCheck.isValid) {
+      throw this.errors.validError(validCheck.errors);
+    }
   }
 }
