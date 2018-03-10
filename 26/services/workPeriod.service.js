@@ -1,6 +1,6 @@
 import CrudService from './crud.service';
 import bluebird from 'bluebird';
-import {calcJointTime} from '../helpers/dates';
+import {calcJointTime} from '../helpers/dates.helper';
 
 export default class WorkPeriod extends CrudService {
   constructor ({context, schemas, errors}) {
@@ -12,17 +12,15 @@ export default class WorkPeriod extends CrudService {
     teamId = parseInt(teamId);
     if (isNaN(teamId)) throw this.errors.invalidId;
 
-    const item = await this.teamRepository.findById(teamId);
+    const team = await this.teamRepository.findById(teamId);
 
-    if (!item) throw this.errors.notFound;
+    if (!team) throw this.errors.notFound;
 
-    const teamUsers = await item.getUsers();
+    const teamUsers = await team.getUsers();
 
     const usersWorkPeriods = await bluebird.mapSeries([userSource, userCompare], async (userId) => {
-      const user = teamUsers.find(teamUser => teamUser.id === +userId).get({raw: true});
-      if (!user) {
-        throw this.errors.userIsNotFound(userId);
-      }
+      const user = teamUsers.find(teamUser => teamUser.id === +userId);
+      if (!user) throw this.errors.userIsNotFound(userId);
 
       const workPeriod = await this.repository.findOne({
         where: {
@@ -31,16 +29,13 @@ export default class WorkPeriod extends CrudService {
         }
       });
 
-      if (!workPeriod) {
-        throw this.errors.userDoesNotWork(userId);
-      }
+      if (!workPeriod) throw this.errors.userDoesNotWork(userId);
 
       return {
         workPeriod: workPeriod.get({raw: true}),
         timezone: user.timezone
       };
-    }
-    );
+    });
 
     return calcJointTime(usersWorkPeriods);
   }

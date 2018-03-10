@@ -25,7 +25,7 @@ export default class LoggerService {
     if (attachInfo) {
       this.logger.info(`${req.originalUrl} ${req.method} ${attachInfo}\n`);
     } else {
-      let query = this._getStringifyObjectIfNotEmpty('query items', req.query);
+      let query = this._getStringifyObjectIfNotEmpty('query object', req.query);
       let body = this._getStringifyObjectIfNotEmpty('body', req.body);
 
       this.logger.info(`${req.originalUrl} ${req.method}${query}${body}`);

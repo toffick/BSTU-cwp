@@ -23,7 +23,7 @@ export default class CrudService {
     };
     let limit = Number(options.limit) || this.defaults.readChunk.limit;
     let offset = Number(options.offset) || this.defaults.readChunk.offset;
-    console.log(whereConditions);
+
     return this.repository.findAll({
       where: {...whereConditions},
       limit,

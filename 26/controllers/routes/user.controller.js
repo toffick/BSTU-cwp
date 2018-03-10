@@ -1,4 +1,5 @@
 import CrudController from './crud.controller';
+import {send} from '../../helpers/sender.helper';
 
 export default class UserController extends CrudController {
   constructor ({userService, cacheService}) {
@@ -15,8 +16,7 @@ export default class UserController extends CrudController {
 
   async checkByToken (req, res) {
     await this.service.checkByToken(req.params.id, req.query.token);
-
-    res.json({success: true});
+    send(req, res, {success: true});
   };
 
 };

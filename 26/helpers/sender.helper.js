@@ -3,7 +3,6 @@ import YAML from 'yamljs';
 const ACCEPT_HANDLERS = {
   'application/yaml': (res, data) => {
     res.setHeader('content-type', 'application/yaml');
-    console.log(data);
     res.send(YAML.stringify(data));
   },
   'application/json': (res, data) => {

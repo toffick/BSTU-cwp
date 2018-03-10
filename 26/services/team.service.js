@@ -1,7 +1,6 @@
 import CrudService from './crud.service';
-import {dateInRange} from '../helpers/dates';
+import {isDateInRange} from '../helpers/dates.helper';
 import bluebird from 'bluebird';
-import YAML from 'yamljs';
 
 export default class Team extends CrudService {
   constructor ({context, schemas, errors}) {
@@ -21,7 +20,7 @@ export default class Team extends CrudService {
     const usersWithStatus = await bluebird.mapSeries(users, async (user) => {
       const workPeriod = (await user.getWorkPeriods({where: {teamId: item.dataValues.id}, raw: true}))[0];
 
-      // херня для минимизации объекта, чтобы yamljs не падал при yamljs.stringif()
+      // херня для минимизации объекта, чтобы yamljs не падал при yamljs.stringify()
       user = user.get({raw: true});
       delete user.TeamUser;
 
@@ -30,7 +29,7 @@ export default class Team extends CrudService {
         return user;
       }
 
-      let userIsActive = dateInRange(workPeriod, user.timezone);
+      let userIsActive = isDateInRange(workPeriod, user.timezone);
       user.status = userIsActive ? 'active' : 'inactive';
       return user;
     });

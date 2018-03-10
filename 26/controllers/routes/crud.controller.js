@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import wrap from '../../helpers/wrap.helper';
-import {send } from '../../helpers/sender';
+import {send } from '../../helpers/sender.helper';
 
 export default class CrudController {
   constructor (service, cacheService) {

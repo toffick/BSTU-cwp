@@ -1,12 +1,13 @@
 import Moment from 'moment';
 import {extendMoment} from 'moment-range';
-import {intersection} from 'lodash';
+import intersection from 'lodash/intersection';
 import twix from 'twix';
 
 const moment = extendMoment(Moment);
 
 export const calcJointTime = ([userSource, userCompare]) => {
 
+  // Calculate of common working hours
   const momentsRangeSource = _getMomentsRangeFromUserWorkPeriod(
     userSource.workPeriod.from,
     userSource.workPeriod.to,
@@ -19,11 +20,10 @@ export const calcJointTime = ([userSource, userCompare]) => {
     userCompare.timezone
   );
 
-  // Calculate of common working hours
   const rangeSource = momentsRangeSource.start.twix(momentsRangeSource.end);
   const rangeCompare = momentsRangeCompare.start.tz(userSource.timezone).twix(momentsRangeCompare.end.tz(userSource.timezone));
 
-  const intersectionHours = rangeSource.intersection(rangeCompare);
+  const commonHours = rangeSource.intersection(rangeCompare);
 
   // Calculate of common working days
   const daysSource = _getDaysArray(userSource.workPeriod.weekDays);
@@ -32,31 +32,31 @@ export const calcJointTime = ([userSource, userCompare]) => {
   const intersectionWorkDays = intersection(daysSource, daysCompare);
 
   return {
-    hours: intersectionHours.simpleFormat('HH:mm'),
+    hours: commonHours.simpleFormat('HH:mm'),
     days: intersectionWorkDays
   };
 };
 
-export const dateInRange = ({from, to, weekDays}, timezone) => {
+export const isDateInRange = ({from, to, weekDays}, timezone) => {
   const daysList = _getDaysArray(weekDays);
 
-  return _dayInDaysList(daysList, timezone) && _timeInRange(from, to, timezone);
+  return _isDayInDaysList(daysList, timezone) && _isTimeInRange(from, to, timezone);
 };
 
 const _getDaysArray = (days) => days.trim().split(' ');
 
-const _timeInRange = (from, to, timezone) => {
+const _isTimeInRange = (from, to, timezone) => {
   const {start, end} = _getMomentsRangeFromUserWorkPeriod(from, to, timezone);
   const currentTzTime = moment().tz(timezone);
 
   return currentTzTime.isBetween(start, end);
 };
 
-const _dayInDaysList = (weekDaysArray, timezone) => {
+const _isDayInDaysList = (weekDaysArray, timezone) => {
   const momentTz = moment().tz(timezone);
-  const currentDayWithTz = momentTz.format('dd');
+  const day = momentTz.format('dd');
 
-  return weekDaysArray.includes(currentDayWithTz);
+  return weekDaysArray.includes(day);
 };
 
 const _getMomentsRangeFromUserWorkPeriod = (from, to, timezone) => {
@@ -65,4 +65,3 @@ const _getMomentsRangeFromUserWorkPeriod = (from, to, timezone) => {
     end: moment.tz(to, 'HH:mm', timezone)
   };
 };
-

@@ -1,4 +1,5 @@
 import CrudController from './crud.controller';
+import {send} from '../../helpers/sender.helper';
 
 export default class TeamController extends CrudController {
   constructor ({teamService, cacheService, workPeriodController}) {
@@ -26,13 +27,13 @@ export default class TeamController extends CrudController {
   async addUser (req, res) {
     await this.service.addUser(req.body.userId, req.params.id);
 
-    res.json({success: true});
+    send(req, res, {success: true});
   }
 
   async removeUser (req, res) {
     await this.service.removeUser(req.body.userId, req.params.id);
 
-    res.json({success: true});
+    send(req, res, {success: true});
   }
 
 };
