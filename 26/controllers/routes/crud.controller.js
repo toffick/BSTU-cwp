@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import wrap from '../../helpers/wrap.helper';
+import {send } from '../../helpers/sender';
 
 export default class CrudController {
   constructor (service, cacheService) {
@@ -29,31 +30,27 @@ export default class CrudController {
   async readAll (req, res) {
     let data = await this.service.readChunk(req.query);
     this.cache.set(req, data);
-    res.json(data);
+
+    send(req, res, data);
   }
 
   async read (req, res) {
     let data = await this.service.read(req.params.id);
     this.cache.set(req, data);
-    res.json(data);
+
+    send(req, res, data);
   }
 
   async create (req, res) {
-    res.json(
-      await this.service.create(req.body)
-    );
+    send(req, res, await this.service.create(req.body));
   }
 
   async update (req, res) {
-    res.json(
-      await this.service.update(req.params.id, req.body)
-    );
+    send(req, res, await this.service.update(req.params.id, req.body));
   }
 
   async delete (req, res) {
-    res.json(
-      await this.service.delete(req.params.id)
-    );
+    send(req, res, await this.service.delete(req.params.id));
   }
 
   registerRoutes () {

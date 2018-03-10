@@ -6,11 +6,6 @@ export default class TeamController extends CrudController {
 
     this.addUser = this.addUser.bind(this);
     this.removeUser = this.removeUser.bind(this);
-    this.calcCoupleWorkPeriod = this.calcCoupleWorkPeriod.bind(this);
-
-    this.routes['/:id/couple-work-period'] = [
-      {method: 'post', cb: this.calcCoupleWorkPeriod}
-    ];
 
     this.routes['/:id/user'] = [
       {method: 'put', cb: this.addUser},
@@ -40,10 +35,4 @@ export default class TeamController extends CrudController {
     res.json({success: true});
   }
 
-  async calcCoupleWorkPeriod (req, res) {
-    let data = await this.service.calculateCoupleWorkPeriod(
-      [req.body.userId1, req.body.userId2],
-      req.params.id);
-    res.json({jointHoursInWeek: data});
-  }
 };

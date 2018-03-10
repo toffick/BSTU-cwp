@@ -2,7 +2,7 @@
   {
     "name": "Nickolai",
     "email": "Nickolai@com.com",
-    "timezone":  "America/Toronto",
+    "timezone":  "Europe/Minsk",
     "validated": true,
     "validationToken": "qqqqqqqqqq"
   },
@@ -16,7 +16,7 @@
   {
     "name": "Vexasia",
     "email": "Vexasia@com.com",
-    "timezone": "Africa/Abidjan",
+    "timezone": "Indian/Maldives",
     "validated": true,
     "validationToken": "qqqqqqqqqq"
   }

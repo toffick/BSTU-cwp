@@ -1,8 +1,8 @@
 [
   {
     "from": "10:00",
-    "to": "18:00",
-    "weekDays": "Su Mo Tu We Th Fr Sa",
+    "to": "13:00",
+    "weekDays": "Mo Tu We Th Fr ",
     "userId": 1,
     "teamId": 1
   },
@@ -14,9 +14,9 @@
     "teamId": 1
   },
   {
-    "from": "10:00",
-    "to": "14:00",
-    "weekDays": "Su Mo Tu We Th Fr Sa",
+    "from": "13:00",
+    "to": "16:00",
+    "weekDays": "Su Mo Tu Fr Sa",
     "userId": 3,
     "teamId": 1
   },

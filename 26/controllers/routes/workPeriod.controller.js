@@ -4,6 +4,12 @@ export default class WorkPeriodController extends CrudController {
   constructor ({workPeriodService, cacheService}) {
     super(workPeriodService, cacheService);
 
+    this.calcCoupleWorkPeriod = this.calcCoupleWorkPeriod.bind(this);
+
+    this.routes['/couple-work-period/:userId'] = [
+      {method: 'get', cb: this.calcCoupleWorkPeriod}
+    ];
+
     this.registerRoutes();
   }
 
@@ -45,4 +51,11 @@ export default class WorkPeriodController extends CrudController {
     );
   }
 
+  async calcCoupleWorkPeriod (req, res) {
+    let data = await this.service.calculateCoupleWorkPeriod(
+      req.meta.userId,
+      req.params.userId,
+      req.meta.teamId);
+    res.json({jointHoursInWeek: data});
+  }
 };
