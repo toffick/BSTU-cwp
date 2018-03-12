@@ -42,7 +42,7 @@ export default async (container) => {
 
   app.use('/api', container.resolve('loggerGlobal'));
   app.use('/api', container.resolve('cacheGlobal'));
-  // app.use('/api', container.resolve('apiController'));
+  app.use('/api', container.resolve('apiController'));
   app.use('/api', container.resolve('errorGlobal'));
 
   return app;

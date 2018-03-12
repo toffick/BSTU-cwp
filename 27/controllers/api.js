@@ -5,7 +5,12 @@ module.exports = ({
 }) => {
   const router = Router();
 
-  // router.use('/user', userController.router);
+  router.use((req, res, next) => {
+    req.meta = {};
+    next();
+  });
+
+  router.use('/users', userController.router);
 
   return router;
 };

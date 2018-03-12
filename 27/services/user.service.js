@@ -5,5 +5,4 @@ export default class User extends CrudService {
     super(context['User'], schemas['user'], errors);
   }
 
-//TODO
 }

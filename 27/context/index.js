@@ -16,6 +16,7 @@ export default ({Sequelize}) => {
   return {
     Tweet,
     User,
+    Like,
     sequelize,
     Sequelize
   };

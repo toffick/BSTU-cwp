@@ -5,5 +5,4 @@ export default class Tweet extends CrudService {
     super(context['Tweet'], schemas['tweet'], errors);
   }
 
-//TODO
 }

@@ -16,21 +16,32 @@ export default class CrudService {
     };
   }
 
-  readChunk (options, whereConditions) {
+  async readChunk (options, where = {}, findOnce = false) {
     options = {
       ...this.defaults.readChunk,
       ...options
     };
-    let limit = Number(options.limit) || this.defaults.readChunk.limit;
-    let offset = Number(options.offset) || this.defaults.readChunk.offset;
 
-    return this.repository.findAll({
-      where: {...whereConditions},
-      limit,
-      offset,
-      order: [[options.sortField, options.sortOrder.toUpperCase()]],
-      raw: true
+    const {sortField, limit, offset, sortOrder} = options;
+
+    let {count, rows} = await this.repository.findAndCountAll({
+      where,
+      limit: +limit,
+      offset: +offset,
+      order: [[sortField, sortOrder.toUpperCase()]]
     });
+
+    if (findOnce) {
+      if (count === 0) {
+        throw this.errors.notFound;
+      } else if (count !== 1) {
+        throw this.error.soManyRows;
+      } else {
+        rows = rows[0];
+      }
+    }
+
+    return rows;
   }
 
   async read (id) {
@@ -40,11 +51,9 @@ export default class CrudService {
       throw this.errors.invalidId;
     }
 
-    const item = await this.repository.findById(id, {raw: true});
+    const item = await this.repository.findById(id);
 
-    if (!item) {
-      throw this.errors.notFound;
-    }
+    if (!item) throw this.errors.notFound;
 
     return item;
   }
@@ -60,13 +69,13 @@ export default class CrudService {
   async update (id, data) {
     this._validateBySchema(data);
 
-    await this.repository.update(data, {where: {id: id}, limit: 1});
+    await this.repository.update(data, {where: {id}, limit: 1});
 
     return this.read(id);
   }
 
   async delete (id) {
-    return this.repository.destroy({where: {id: id}});
+    return this.repository.destroy({where: {id}});
   }
 
   _validateBySchema (data) {

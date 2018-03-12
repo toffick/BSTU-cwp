@@ -1,6 +1,8 @@
 import express from 'express';
 
 express.response.error = function (error) {
+  //TODO remove me pls))
+  console.log(error);
   if (!error.code) {
     error = {
       message: error.toString(),
@@ -23,16 +25,11 @@ export default {
     code: 'user_non_validated',
     status: 403
   },
-  userIsNotFound: (id) => ({
-    message: `the user with id ${id} is not in this team`,
-    code: 'user_not_in_team',
-    status: 404
-  }),
-  userDoesNotWork: (id) => ({
-    message: `the user with id ${id} doesn't work by schedule now`,
-    code: 'user_does_not_work',
+  soManyRows: {
+    message: 'More than one record was found for the request',
+    code: 'so_many_rows',
     status: 408
-  }),
+  },
   invalidToken: {
     message: 'Invalid user token',
     code: 'invalid_token',
