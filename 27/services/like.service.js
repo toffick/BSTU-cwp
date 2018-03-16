@@ -7,8 +7,8 @@ export default class Like extends CrudService {
     this.tweetRepository = context['Tweet'];
   }
 
-  async readChunk (id) {
-    const tweet = await this.tweetRepository.findById(id);
+  async readChunk (tweetId) {
+    const tweet = await this.tweetRepository.findById(tweetId);
     if (!tweet) throw this.errors.notFound;
 
     return tweet.getLikes();
@@ -26,7 +26,11 @@ export default class Like extends CrudService {
     return tweet.addLikes([liker]);
   }
 
-  async delete ({tweetId, id}) {
-    return this.repository.destroy({where: {tweetId, id}});
+  async delete ({tweetId, authorId, likerId}) {
+    const author = await this.userRepository.findById(authorId);
+
+    if (!author) throw this.errors.notFound;
+
+    return this.repository.destroy({where: {tweetId, authorId: likerId}});
   }
 }

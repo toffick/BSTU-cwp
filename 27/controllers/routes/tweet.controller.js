@@ -14,6 +14,7 @@ export default class Tweet extends CrudController {
   }
 
   async readAll (req, res) {
+    console.log(req.meta.user);
     let data = await this.service.readChunk(req.query, {
       authorId: req.meta.userId
     });

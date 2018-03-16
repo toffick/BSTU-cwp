@@ -1,4 +1,5 @@
 import validator from '../helpers/validator.helper';
+import {normalizeLimit} from '../helpers/paginator.helper';
 
 export default class CrudService {
   constructor (repository, schema, errors) {
@@ -8,7 +9,7 @@ export default class CrudService {
 
     this.defaults = {
       readChunk: {
-        limit: 5,
+        limit: 10,
         offset: 0,
         sortOrder: 'asc',
         sortField: 'id'
@@ -26,7 +27,7 @@ export default class CrudService {
 
     let {count, rows} = await this.repository.findAndCountAll({
       where,
-      limit: +limit,
+      limit: normalizeLimit(limit),
       offset: +offset,
       order: [[sortField, sortOrder.toUpperCase()]]
     });

@@ -5,12 +5,11 @@ export default class User extends CrudController {
   constructor ({userService, cacheService, tweetController}) {
     super(userService, cacheService);
 
-    this.router.use('/:userId/tweets', (req, res, next) => {
+    this.router.use('/:userId/tweets', async (req, res, next) => {
       req.meta.userId = req.params.userId;
       next();
     }, tweetController.router);
 
     this.registerRoutes();
   }
-
 };

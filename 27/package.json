@@ -21,7 +21,8 @@
     "sequelize": "4.23.4",
     "twix": "^1.2.1",
     "winston": "^2.4.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "hal": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

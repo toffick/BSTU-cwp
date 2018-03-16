@@ -12,6 +12,7 @@ export default ({Sequelize}) => {
   Tweet.belongsToMany(User, {as: 'Likes', through: Like, otherKey: 'authorId', foreignKey: 'tweetId'});
 
   User.hasMany(Tweet, {foreignKey: 'authorId'});
+  Tweet.belongsTo(User, {foreignKey: 'authorId', as: 'author'});
 
   return {
     Tweet,

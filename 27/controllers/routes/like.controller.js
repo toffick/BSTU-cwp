@@ -11,12 +11,14 @@ export default class Like extends CrudController {
 
     this.routes = {
       '/': [
-        {method: 'get', cb: this.readAll},
-        {method: 'post', cb: this.create},
+        {method: 'get', cb: this.readAll}
       ],
-      '/:id': [
-        {method: 'delete', cb: this.delete}
-      ]
+      '/like': [{
+        method: 'post', cb: this.create
+      }],
+      '/dislike': [{
+        method: 'post', cb: this.delete
+      }]
     };
 
     this.registerRoutes();
@@ -35,14 +37,15 @@ export default class Like extends CrudController {
         likerId: req.body.likerId,
         tweetId: req.meta.tweetId
       });
-    send(req, res, item[0]);
+    send(req, res, item);
   }
 
   async delete (req, res) {
     const item = await this.service.delete(
       {
         tweetId: req.meta.tweetId,
-        id: req.params.id
+        authorId: req.meta.userId,
+        likerId: req.body.likerId
       });
     send(req, res, item);
   }
