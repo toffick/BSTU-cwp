@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
 import config from 'config';
-import {tweet, user, like} from '../models';
+import {tweet, user, like} from './models/index';
 
 export default ({Sequelize}) => {
   const sequelize = new Sequelize(config.db.name, config.db.user, config.db.pass, config.db.options);

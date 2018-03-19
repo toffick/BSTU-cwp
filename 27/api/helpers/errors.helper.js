@@ -1,7 +1,7 @@
 import express from 'express';
 
 express.response.error = function (error) {
-  //TODO remove me pls))
+  // TODO remove me pls))
   console.log(error);
   if (!error.code) {
     error = {
@@ -65,5 +65,10 @@ export default {
       message: msg,
       code: 'validate_error',
       status: 400
-    })
+    }),
+  custom: (message, code, status) => ({
+    message,
+    code,
+    status
+  })
 };

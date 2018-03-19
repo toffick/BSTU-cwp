@@ -20,7 +20,7 @@ export default class Tweets {
   }
 
   async readAll (req, res) {
-    let data = await this.service.readAllWithAuthors(req.query);
+    let data = await this.service.readAllWithAuthors(req.meta.query);
     this.cache.set(req, data);
 
     send(req, res, data);

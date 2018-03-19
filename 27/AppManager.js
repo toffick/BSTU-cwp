@@ -30,8 +30,6 @@ export default async (container) => {
 
   const app = express();
 
-  app.use(express.static('public'));
-  app.use(cookieParser(config.cookie.key));
   app.use(bodyParser.json());
   app.use((req, res, next) => {
     const contentType = req.headers['content-type'] || 'application/json';
@@ -40,10 +38,12 @@ export default async (container) => {
     handler(req, res, next);
   });
 
-  app.use('/api', container.resolve('loggerGlobal'));
-  app.use('/api', container.resolve('cacheGlobal'));
-  app.use('/api', container.resolve('apiController'));
-  app.use('/api', container.resolve('errorGlobal'));
+  app.use('/api',
+    container.resolve('loggerGlobal'),
+    container.resolve('cacheGlobal'),
+    container.resolve('apiController'),
+    container.resolve('errorGlobal')
+  );
 
   return app;
 };

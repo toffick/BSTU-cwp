@@ -2,7 +2,8 @@ import {Router} from 'express';
 
 module.exports = ({
   userController,
-  tweetsController
+  tweetsController,
+  queryMiddleware
 }) => {
   const router = Router();
 
@@ -12,7 +13,7 @@ module.exports = ({
   });
 
   router.use('/users', userController.router);
-  router.use('/tweets', tweetsController.router);
+  router.use('/tweets', queryMiddleware, tweetsController.router);
 
   return router;
 };

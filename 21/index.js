@@ -11,3 +11,9 @@ const tempDataToDb = require('./helpers/tempDataToDb');
 
     server.listen(config.app.port, () => console.log('Running'));
 })();
+
+var hal = require('hal');
+
+var resource = new hal.Resource({name: "Harry"}, '/harry');
+resource.link('hello', '/harry/hello');
+console.log(resource.toJSON());

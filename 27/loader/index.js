@@ -1,17 +1,18 @@
 import {createContainer, asClass, asValue, asFunction, Lifetime} from 'awilix';
 import {Sequelize} from 'sequelize';
-import context from '../context';
-import errors from '../helpers/errors.helper';
-import apiController from '../controllers/api';
-import schemas from '../schemas';
+import context from '../db/index';
+import errors from '../api/helpers/errors.helper';
+import apiController from '../api/controllers/api';
 
 export default () => {
   const container = createContainer();
 
   container.loadModules([
-    ['services/*.js', {register: asClass}],
-    ['controllers/routes/*.js', {register: asClass}],
-    ['global-controllers/*.js', {register: asFunction}]
+    ['api/services/*.js', {register: asClass}],
+    ['api/controllers/routes/*.js', {register: asClass}],
+    ['api/global-controllers/*.js', {register: asFunction}],
+    ['api/middlewares/*.js', {register: asFunction}],
+    ['schemas/*.js', {register: asFunction}]
   ], {
     formatName: 'camelCase',
     resolverOptions: {
@@ -21,7 +22,6 @@ export default () => {
 
   container.register({
     apiController: asFunction(apiController).singleton(),
-    schemas: asFunction(schemas)
   });
 
   container.register({

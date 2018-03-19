@@ -1,4 +1,4 @@
-import validator from '../helpers/validator.helper';
+import validator from '../../helpers/validator.helper';
 import {normalizeLimit} from '../helpers/paginator.helper';
 
 export default class CrudService {
@@ -67,16 +67,24 @@ export default class CrudService {
     return item.get({plain: true});
   }
 
-  async update (id, data) {
+  async update (where, data) {
     this._validateBySchema(data);
 
-    await this.repository.update(data, {where: {id}, limit: 1});
+    if (typeof (where) !== 'object') {
+      where = {id: where};
+    }
 
-    return this.read(id);
+    await this.repository.update(data, {where, limit: 1});
+
+    return this.read(where.id);
   }
 
-  async delete (id) {
-    return this.repository.destroy({where: {id}});
+  async delete (where) {
+    if (typeof (where) !== 'object') {
+      where = {id: where};
+    }
+
+    return this.repository.destroy({where});
   }
 
   _validateBySchema (data) {

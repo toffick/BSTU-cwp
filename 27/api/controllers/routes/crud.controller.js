@@ -13,7 +13,8 @@ export default class CrudController {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
 
-    this.router = Router();
+    this.router = Router({mergeParams: true});
+
     this.routes = {
       '/': [
         {method: 'get', cb: this.readAll},

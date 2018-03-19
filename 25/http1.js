@@ -2,7 +2,7 @@ const express = require('express');
 const compression = require('compression');
 const app = express();
 
-app.use(compression({level: 6}));
+app.use(compression({level: 9}));
 app.use(express.static(__dirname + '/public'));
 
 app.use((req, res) => {

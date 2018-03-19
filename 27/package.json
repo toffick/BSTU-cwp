@@ -12,17 +12,18 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-form": "^0.12.6",
+    "hal": "^1.2.0",
     "joi": "^13.1.2",
     "lodash": "latest",
     "lru-cache": "^4.1.1",
     "moment": "^2.19.3",
     "moment-range": "^3.1.1",
     "mysql2": "1.5.1",
+    "npm": "^5.7.1",
     "sequelize": "4.23.4",
     "twix": "^1.2.1",
     "winston": "^2.4.0",
-    "yamljs": "^0.3.0",
-    "hal": "^1.2.0"
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

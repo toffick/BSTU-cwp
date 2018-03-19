@@ -25,7 +25,7 @@ export default class Like extends CrudController {
   }
 
   async readAll (req, res) {
-    let data = await this.service.readChunk(req.meta.tweetId);
+    let data = await this.service.readChunk(req.meta.tweet);
     this.cache.set(req, data);
 
     send(req, res, data);
@@ -34,8 +34,8 @@ export default class Like extends CrudController {
   async create (req, res) {
     const item = await this.service.create(
       {
-        likerId: req.body.likerId,
-        tweetId: req.meta.tweetId
+        tweetId: req.params.tweetId,
+        likerId: req.body.likerId
       });
     send(req, res, item);
   }
@@ -43,8 +43,7 @@ export default class Like extends CrudController {
   async delete (req, res) {
     const item = await this.service.delete(
       {
-        tweetId: req.meta.tweetId,
-        authorId: req.meta.userId,
+        tweetId: req.params.tweetId,
         likerId: req.body.likerId
       });
     send(req, res, item);

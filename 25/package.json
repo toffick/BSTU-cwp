@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start1": "node http1.js",
-    "start2": "node http2.js"
+    "s1": "node http1.js",
+    "s2": "node http2.js"
   },
   "dependencies": {
     "express": "^4.16.2",

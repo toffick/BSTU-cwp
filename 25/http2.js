@@ -16,7 +16,6 @@ const server = http2.createSecureServer(
     onRequest
 );
 
-
 function onRequest(req, res) {
     sendFile(req.stream, url.parse(req.headers[':path']).pathname);
 }
@@ -52,7 +51,5 @@ function push(stream, filePath) {
         pushStream.respondWithFD(descriptor, headers)
     });
 }
-
-
 
 server.listen(8443);
