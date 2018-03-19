@@ -24,8 +24,8 @@ export const applySorting = (items, orders) => {
   orders.forEach(({field, val}) => {
     //TODO тут что-то странное
     items = items.sort((a, b) => {
-      return get(a, field) < get(b, field) ?
-        -1 : get(a, field) < get(b, field) ?
+      return a[field] < b[field] ?
+        -1 : a[field] < b[field] ?
           1 : 0;
     });
     if (val === 'desc') {
@@ -48,19 +48,19 @@ export const applyFilters = (items, filters) => {
 
 const filterCreator = ({field, val}) => {
   const FILTER_HANDLERS = {
-    'author.email': (item) => get(item, field) === val,
-    'publishedAfter': (item) => get(item, 'publishedOn') > val,
-    'publishedBefore': (item) => get(item, 'publishedOn') < val
+    'author.email': (item) => item[field] === val,
+    'publishedAfter': (item) => item['publishedOn'] > val,
+    'publishedBefore': (item) => item['publishedOn'] < val
   };
 
   return FILTER_HANDLERS[field];
 };
 
-export function addLinks(tweet, index, tweets) {
+export function addLinks (tweet, index, tweets) {
   tweet.links = [];
 
   // тут получаем его как-то динамически
-  const prefix = 'http://localhost:3000/api/v1/users';
+  const prefix = 'http://localhost:9001/api/users';
 
   if (tweets[index - 1]) {
     tweet.links.push({

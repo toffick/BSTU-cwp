@@ -25,8 +25,9 @@ export default class Tweets extends CrudService {
       include: {
         model: this.userRepository,
         as: 'author',
-        attributes: ['name', 'email']
-      }
+        attributes: ['name', 'email', 'id']
+      },
+      raw: true
     });
     let items;
 
