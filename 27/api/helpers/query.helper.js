@@ -20,6 +20,21 @@ export const parseQueryItem = (queryItem, schema) => {
   }
 };
 
+export const applySorting = (items, orders) => {
+  orders.forEach(({field, val}) => {
+    //TODO тут что-то странное
+    items = items.sort((a, b) => {
+      return get(a, field) < get(b, field) ?
+        -1 : get(a, field) < get(b, field) ?
+          1 : 0;
+    });
+    if (val === 'desc') {
+      items = items.reverse();
+    }
+  });
+  return items;
+};
+
 export const applyFilters = (items, filters) => {
   filters.forEach((filterObj) => {
     const filterHandler = filterCreator(filterObj);
@@ -33,18 +48,10 @@ export const applyFilters = (items, filters) => {
 
 const filterCreator = ({field, val}) => {
   const FILTER_HANDLERS = {
-    'author.email': (item) => {
-      // console.log(get(item, field))/
-      // console.log(val);
-      console.log((get(item, field) === val));
-      return get(item, field) === val;
-    }
+    'author.email': (item) => get(item, field) === val,
+    'publishedAfter': (item) => get(item, 'publishedOn') > val,
+    'publishedBefore': (item) => get(item, 'publishedOn') < val
   };
 
   return FILTER_HANDLERS[field];
-};
-
-export const applySorting = (items, orders) => {
-  // TODO
-  return items;
 };

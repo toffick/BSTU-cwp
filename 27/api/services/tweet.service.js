@@ -28,13 +28,12 @@ export default class Tweets extends CrudService {
         attributes: ['name', 'email']
       }
     });
+    let items;
 
-    let {items, meta} = getPages(rows, page, limit);
-    items = applyFilters(items, filters);
+    items = applyFilters(rows, filters);
     items = applySorting(items, orders);
-    // фильтры js
-    // сорировка через js
+    let metaItems = getPages(items, page, limit);
 
-    return {items, meta};
+    return metaItems;
   }
 }
