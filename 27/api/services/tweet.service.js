@@ -1,5 +1,5 @@
 import CrudService from './crud.service';
-import {applyFilters, applySorting} from '../helpers/query.helper';
+import {addLinks, applyFilters, applySorting} from '../helpers/query.helper';
 import {getPages} from '../helpers/paginator.helper';
 
 export default class Tweets extends CrudService {
@@ -32,6 +32,7 @@ export default class Tweets extends CrudService {
 
     items = applyFilters(rows, filters);
     items = applySorting(items, orders);
+    items = items.map(addLinks);
     let metaItems = getPages(items, page, limit);
 
     return metaItems;

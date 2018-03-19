@@ -55,3 +55,31 @@ const filterCreator = ({field, val}) => {
 
   return FILTER_HANDLERS[field];
 };
+
+export function addLinks(tweet, index, tweets) {
+  tweet.links = [];
+
+  // тут получаем его как-то динамически
+  const prefix = 'http://localhost:3000/api/v1/users';
+
+  if (tweets[index - 1]) {
+    tweet.links.push({
+      rel: 'prev',
+      href: `${prefix}/${tweets[index - 1]['author.id']}/tweets/${tweets[index - 1].id}`,
+    });
+  }
+
+  tweet.links.push({
+    rel: 'self',
+    href: `${prefix}/${tweet['author.id']}/tweets/${tweet.id}`,
+  });
+
+  if (tweets[index + 1]) {
+    tweet.links.push({
+      rel: 'next',
+      href: `${prefix}/${tweets[index + 1]['author.id']}/tweets/${tweets[index + 1].id}`,
+    });
+  }
+
+  return tweet;
+}
