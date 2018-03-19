@@ -10,31 +10,34 @@ export const normalizeLimit = (limit) => {
   }
 };
 
-export const getPages = (array, page, limit) => {
+export const applyPagination = (array, page, limit) => {
   page = +page;
 
-  const meta = {};
+  const pagination = {};
   const start = (page - 1) * limit;
   const end = page * limit;
 
   const items = array.slice(start, end);
   if (items.length === 0) {
-    return meta;
+    pagination.current = page;
+    pagination.first = 1;
+    pagination.last = 1;
+    return {items, pagination};
   }
 
   if (page > 1) {
-    meta.prev = page - 1;
+    pagination.prev = page - 1;
   }
 
   if (end < array.length) {
-    meta.next = page + 1;
+    pagination.next = page + 1;
   }
 
   if (items.length !== array.length) {
-    meta.current = page;
-    meta.first = 1;
-    meta.last = Math.ceil(array.length / limit);
+    pagination.current = page;
+    pagination.first = 1;
+    pagination.last = Math.ceil(array.length / limit);
   }
 
-  return {items, meta};
+  return {items, pagination};
 };

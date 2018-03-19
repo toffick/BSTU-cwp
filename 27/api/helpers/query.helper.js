@@ -1,5 +1,4 @@
 import validator from '../../helpers/validator.helper';
-import get from 'lodash/get';
 
 export const parseQueryItem = (queryItem, schema) => {
   if (queryItem) {
@@ -22,10 +21,9 @@ export const parseQueryItem = (queryItem, schema) => {
 
 export const applySorting = (items, orders) => {
   orders.forEach(({field, val}) => {
-    //TODO тут что-то странное
     items = items.sort((a, b) => {
       return a[field] < b[field] ?
-        -1 : a[field] < b[field] ?
+        -1 : a[field] > b[field] ?
           1 : 0;
     });
     if (val === 'desc') {
