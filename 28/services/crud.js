@@ -1,11 +1,7 @@
-import validator from '../../helpers/validator.helper';
-import {normalizeLimit} from '../helpers/paginator.helper';
-
-export default class CrudService {
-  constructor (repository, schema, errors) {
+module.exports = class CrudService {
+  constructor(repository, errors) {
     this.repository = repository;
     this.errors = errors;
-    this.schema = schema;
 
     this.defaults = {
       readChunk: {
@@ -17,18 +13,13 @@ export default class CrudService {
     };
   }
 
-  async readChunk (options, where = {}, findOnce = false) {
-    options = {
-      ...this.defaults.readChunk,
-      ...options
-    };
+  async readChunk(options, where = {}, findOnce = false) {
+    const {sortField, limit, offset, sortOrder} = this.defaults.readChunk;
 
-    const {sortField, limit, offset, sortOrder} = options;
-
-    let {count, rows} = await this.repository.findAndCountAll({
+    let items = await this.repository.findAll({
       where,
-      limit: normalizeLimit(limit),
-      offset: +offset,
+      limit,
+      offset,
       order: [[sortField, sortOrder.toUpperCase()]]
     });
 
@@ -38,14 +29,14 @@ export default class CrudService {
       } else if (count !== 1) {
         throw this.errors.soManyRows;
       } else {
-        rows = rows[0];
+        items = items[0];
       }
     }
 
-    return rows;
+    return items;
   }
 
-  async read (id) {
+  async read(id) {
     id = parseInt(id);
 
     if (isNaN(id)) {
@@ -59,16 +50,13 @@ export default class CrudService {
     return item;
   }
 
-  async create (data) {
-    this._validateBySchema(data);
-
+  async create(data) {
     const item = await this.repository.create(data);
 
     return item.get({plain: true});
   }
 
-  async update (where, data) {
-    this._validateBySchema(data);
+  async update(where, data) {
 
     if (typeof (where) !== 'object') {
       where = {id: where};
@@ -79,7 +67,7 @@ export default class CrudService {
     return this.read(where.id);
   }
 
-  async delete (where) {
+  async delete(where) {
     if (typeof (where) !== 'object') {
       where = {id: where};
     }
@@ -87,10 +75,4 @@ export default class CrudService {
     return this.repository.destroy({where});
   }
 
-  _validateBySchema (data) {
-    let validCheck = validator(this.schema, data);
-    if (!validCheck.isValid) {
-      throw this.errors.validError(validCheck.errors);
-    }
-  }
-}
+};

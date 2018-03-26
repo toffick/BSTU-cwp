@@ -1,0 +1,472 @@
+swagger: '2.0'
+info:
+  title: cwp-28
+  version: 1.0.0
+host: localhost
+schemes:
+  - http
+basePath: /api/v1
+produces:
+  - application/json
+paths:
+  /persons:
+    get:
+      summary: Get persons
+      tags:
+        - Persons
+      parameters:
+        - name: limit
+          in: query
+          type: number
+          format: integer
+        - name: offset
+          in: query
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              persons:
+                type: array
+                items:
+                  $ref: '#/definitions/Person'
+        '500':
+          description: Server error
+    post:
+      summary: Create person
+      tags:
+        - Persons
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Person'
+      responses:
+        '201':
+          description: Person created
+          schema:
+            $ref: '#/definitions/Person'
+        '409':
+          description: Already exist
+        '500':
+          description: Server error
+  '/persons/{id}':
+    get:
+      summary: Get person by id
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Person item
+          schema:
+            $ref: '#/definitions/Person'
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+    put:
+      summary: Update person
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Person'
+      responses:
+        '200':
+          description: Person updated
+          schema:
+            $ref: '#/definitions/Person'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete person
+      tags:
+        - Persons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Person deleted
+          schema:
+            $ref: '#/definitions/Person'
+        '500':
+          description: Server error
+  '/persons/{personId}/ingestions':
+    parameters:
+      - name: personId
+        in: path
+        required: true
+        type: string
+    get:
+      summary: Get ingestions
+      tags:
+        - Ingestions
+      parameters:
+        - name: limit
+          in: query
+          type: number
+          format: integer
+        - name: offset
+          in: query
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              ingestions:
+                type: array
+                items:
+                  $ref: '#/definitions/Ingestion'
+        '500':
+          description: Server error
+    post:
+      summary: Create ingestion
+      tags:
+        - Ingestions
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Ingestion'
+      responses:
+        '201':
+          description: Ingestion created
+          schema:
+            $ref: '#/definitions/Ingestion'
+        '409':
+          description: Already exist
+        '500':
+          description: Server error
+  '/persons/{personId}/ingestions/{id}':
+    parameters:
+      - name: personId
+        in: path
+        required: true
+        type: string
+    get:
+      summary: Get ingestion by id
+      tags:
+        - Ingestions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ingestion item
+          schema:
+            $ref: '#/definitions/Ingestion'
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+    put:
+      summary: Update ingestion
+      tags:
+        - Ingestions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Ingestion'
+      responses:
+        '200':
+          description: Ingestion updated
+          schema:
+            $ref: '#/definitions/Ingestion'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete ingestion
+      tags:
+        - Ingestions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ingestion deleted
+          schema:
+            $ref: '#/definitions/Ingestion'
+        '500':
+          description: Server error
+  /food:
+    get:
+      summary: Get food
+      tags:
+        - Food
+      parameters:
+        - name: limit
+          in: query
+          type: number
+          format: integer
+        - name: offset
+          in: query
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              food:
+                type: array
+                items:
+                  $ref: '#/definitions/Food'
+        '500':
+          description: Server error
+    post:
+      summary: Create food
+      tags:
+        - Food
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Food'
+      responses:
+        '201':
+          description: Food created
+          schema:
+            $ref: '#/definitions/Food'
+        '409':
+          description: Already exist
+        '500':
+          description: Server error
+  '/food/{id}':
+    get:
+      summary: Get food by id
+      tags:
+        - Food
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Food item
+          schema:
+            $ref: '#/definitions/Food'
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+    put:
+      summary: Update food
+      tags:
+        - Food
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Food'
+      responses:
+        '200':
+          description: Food updated
+          schema:
+            $ref: '#/definitions/Food'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete food
+      tags:
+        - Food
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Food deleted
+          schema:
+            $ref: '#/definitions/Food'
+        '500':
+          description: Server error
+  /agents:
+    get:
+      summary: Get agents
+      tags:
+        - Agents
+      parameters:
+        - name: limit
+          in: query
+          type: number
+          format: integer
+        - name: offset
+          in: query
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              agents:
+                type: array
+                items:
+                  $ref: '#/definitions/Agent'
+        '500':
+          description: Server error
+    post:
+      summary: Create agent
+      tags:
+        - Agents
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Agent'
+      responses:
+        '201':
+          description: Agents created
+          schema:
+            $ref: '#/definitions/Agent'
+        '409':
+          description: Already exist
+        '500':
+          description: Server error
+  '/agent/{id}':
+    get:
+      summary: Get agent by id
+      tags:
+        - Agents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Agent item
+          schema:
+            $ref: '#/definitions/Agent'
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+    put:
+      summary: Update agent
+      tags:
+        - Agents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Agent'
+      responses:
+        '200':
+          description: Agents updated
+          schema:
+            $ref: '#/definitions/Agent'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete agent
+      tags:
+        - Agents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Agent deleted
+          schema:
+            $ref: '#/definitions/Agent'
+        '500':
+          description: Server error
+definitions:
+  Person:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      name:
+        type: string
+      address:
+        type: string
+      isAlive:
+        type: boolean
+  Food:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      name:
+        type: string
+      calories:
+        type: number
+        format: integer
+  Agent:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      callsign:
+        type: string
+  Ingestion:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+      when:
+        type: string
+        format: date-time
+      foodId:
+        $ref: '#/definitions/Food/properties/id'
+      personId:
+        $ref: '#/definitions/Person/properties/id'
+      reportedById:
+        $ref: '#/definitions/Agent/properties/id'

@@ -1,0 +1,42 @@
+{
+  "name": "cwp-28",
+  "description": "",
+  "version": "1.0.0",
+  "author": "toffick <email@email.com>",
+  "contributors": [],
+  "repository": {
+    "type": "git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "config": "^1.30.0",
+    "express": "^4.0.0",
+    "mysql2": "1.5.1",
+    "npm": "^5.8.0",
+    "sequelize": "^4.37.4",
+    "swaggerize-express": "^4.0.0",
+    "swagmock": "~0.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^2",
+    "tape": "^4",
+    "istanbul": "~0.4.3",
+    "is-my-json-valid": "^2.13.1",
+    "js-yaml": "^3.2.6",
+    "supertest": "^1.2.0",
+    "swagger-parser": "^3.4.1"
+  },
+  "scripts": {
+    "test": "tape 'tests/**/*.js'",
+    "cover": "istanbul cover tape -- 'tests/**/*.js'",
+    "lint": "eslint .",
+    "regenerate": "yo swaggerize:test --framework express --apiPath './config/swagger.yaml'"
+  },
+  "generator-swaggerize": {
+    "version": "4.0.0"
+  },
+  "main": "./server"
+}
