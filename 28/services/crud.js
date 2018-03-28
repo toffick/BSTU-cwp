@@ -16,7 +16,7 @@ module.exports = class CrudService {
   async readChunk(options, where = {}, findOnce = false) {
     const {sortField, limit, offset, sortOrder} = this.defaults.readChunk;
 
-    let items = await this.repository.findAll({
+    let {rows, count} = await this.repository.findAndCountAll({
       where,
       limit,
       offset,
@@ -29,11 +29,11 @@ module.exports = class CrudService {
       } else if (count !== 1) {
         throw this.errors.soManyRows;
       } else {
-        items = items[0];
+        rows = rows[0];
       }
     }
 
-    return items;
+    return rows;
   }
 
   async read(id) {
