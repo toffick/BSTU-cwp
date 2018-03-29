@@ -17,8 +17,7 @@ type Turtle {
     color: String,
     weapon: Weapon,
     favoritePizza: Pizza,
-    secondFavoritePizza: Pizza,
-    filterByFavoritePizza(filter: String): [Turtle]
+    secondFavoritePizza: Pizza
 }
 
 input TurtleInput {
@@ -37,6 +36,7 @@ type Query {
     weapon(id: Int!): Weapon,
     pizzas(limit: Int, order: [[String]]): [Pizza],
     pizza(id: Int!): Pizza,
+    filterByFavoritePizza(filter: String): [Turtle]
 }
 
 

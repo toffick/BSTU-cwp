@@ -7,8 +7,11 @@ module.exports = (Sequelize, config) => {
 
   Weapon.hasOne(Turtle);
 
-  Pizza.hasOne(Turtle, {as: 'favoritePizza'});
-  Pizza.hasOne(Turtle, {as: 'secondFavoritePizza'});
+  // Pizza.hasOne(Turtle, {as: 'favoritePizza'});
+  // Pizza.hasOne(Turtle, {as: 'secondFavoritePizza'});
+
+	Turtle.belongsTo(Pizza, {as: 'favoritePizza', foreignKey: 'favoritePizzaId'})
+	Turtle.belongsTo(Pizza, {as: 'secondFavoritePizza', foreignKey: 'secondFavoritePizzaId'})
 
   return {
     turtles: Turtle,

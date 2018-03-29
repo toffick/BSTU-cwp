@@ -27,23 +27,21 @@ module.exports = db => {
 			pizza(_, {id}) {
 				return db.pizzas.findById(id, {raw: true});
 			},
+			filterByFavoritePizza(_, {filter}) {
+				return servises.turtle.getByFavoritePizza(filter, db)
+			}
 		},
 
 		Turtle: {
 			weapon(turtle) {
 				return db.weapons.findById(turtle.weaponId, {raw: true})
 			},
-			favoritePizza(turtle, context) {
+			favoritePizza(turtle) {
 				return db.pizzas.findById(turtle.favoritePizzaId, {raw: true})
 			},
 			secondFavoritePizza(turtle) {
 				return db.pizzas.findById(turtle.secondFavoritePizzaId, {raw: true})
-			},
-			filterByFavoritePizza(turtle, context) {
-				return servises.pizza.getByFavoritePizza(context.filter, [
-					turtle.favoritePizzaId, turtle.secondFavoritePizza
-				], db)
-			},
+			}
 		},
 
 		Mutation: {

@@ -8,7 +8,7 @@ module.exports = (db) => {
         db.weapons
     );
     const turtleService = new TurtleService(
-        db.turtles
+        db
     );
     const pizzaService = new PizzaService(
         db.pizzas

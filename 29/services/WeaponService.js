@@ -15,7 +15,6 @@ class WeaponService extends CrudService
     }
 
     async update(req) {
-
         return super.update(req, {
             personId : req.params.personId
         });
