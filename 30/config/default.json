@@ -7,7 +7,7 @@
     "user": "root",
     "pass": "root",
     "options": {
-      "dialect": "mysql",
+      "dialect": "postgres",
       "host": "localhost",
       "define": {
         "timestamps": false,
