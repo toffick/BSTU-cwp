@@ -9,15 +9,17 @@ module.exports = (Sequelize, sequelize) => {
 				},
 				email: Sequelize.STRING,
 				password: Sequelize.STRING,
-				codes: {
-					type: Sequelize.STRING,
-					set(val) {
-						this.setDataValue('codes', JSON.stringify(val));
-					},
-					get() {
-						return JSON.parse(this.getDataValue('codes'));
-					}
-				}
+		codes: Sequelize.JSON,
+// /
+// 			codes: {
+// 					type: Sequelize.STRING,
+// 					set(val) {
+// 						this.setDataValue('codes', JSON.stringify(val));
+// 					},
+// 					get() {
+// 						return JSON.parse(this.getDataValue('codes'));
+// 					}
+// 				}
 			},
 			{
 				hooks: {
