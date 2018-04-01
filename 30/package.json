@@ -4,13 +4,15 @@
   "description": "eee babik",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start-service": "node service",
+    "start-sso": "set NODE_CONFIG_DIR=/sso &&  node sso",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "config": "^1.30.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.2.0",

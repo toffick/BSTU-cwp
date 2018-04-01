@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        input {
+            margin: 10px;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        form {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/login" method="post">
+    <table>
+        <tr>
+            <th>
+                <label for="login">Email</label>
+            </th>
+            <th>
+                <input type="text" name="email" placeholder="example@gmail.com">
+            </th>
+            <br>
+        </tr>
+        <tr>
+            <th>
+                <label for="login">Password</label>
+            </th>
+            <th>
+                <input type="password" name="password" placeholder="password">
+            </th>
+            <br>
+        </tr>
+        <tr>
+            <th>
+                <input type="submit">
+
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
