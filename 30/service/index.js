@@ -14,16 +14,14 @@ app.use(cookieParser(config.appService.cookie.key));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/resource', auth, (req, res, next) => {
-	res.send('Eeee baby');
+app.use('/resource', auth, (req, res) => {
+	res.json(req.user);
 });
 
-app.use('/token', (req, res, next) => {
+app.use('/token', (req, res) => {
 	const {token, source} = req.query;
 	res.cookie("__service_token", token, {signed: true});
-	const redirectUrl = source;
-	console.log(redirectUrl);
-	res.redirect(redirectUrl);
+	res.redirect(source);
 });
 
 (async () => {
