@@ -6,20 +6,14 @@ module.exports = (Sequelize, sequelize) => (sequelize.define('commit', {
 				primaryKey: true,
 				autoIncrement: true
 			},
-			repoId: Sequelize.INTEGER,
 			message: Sequelize.STRING,
-			hash: {
-				type: Sequelize.STRING,
-				set(val) {
-					bcrypt.genSalt(11)
-							.then((salt) => {
-										const msg = this.getDataValue('message');
-										// return bcrypt.hash(this.getDataValue('message'), salt))
-										return bcrypt.hash(this.getDataValue('message'), salt)
-									}
-							)
-							.then((hash) => this.setDataValue('hash', hash));
-				}
+			hash: Sequelize.STRING,
+		}, {
+			updateOnDuplicate: ['hash'],
+			hooks: {
+				beforeCreate: (commit) => bcrypt.genSalt(11)
+						.then((salt) => bcrypt.hash(commit.message, salt))
+						.then((hash) => commit.hash = hash)
 			}
 		})
 );

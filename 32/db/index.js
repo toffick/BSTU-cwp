@@ -7,6 +7,8 @@ module.exports = (Sequelize) => {
 	const Commit = commit(Sequelize, sequelize);
 	const Repo = repo(Sequelize, sequelize);
 
+	Repo.hasMany(Commit);
+
 	return {
 		Commit,
 		Repo,

@@ -7,4 +7,4 @@ module.exports = (Sequelize, sequelize) => sequelize.define('repo', {
 			name: Sequelize.STRING,
 			author: Sequelize.STRING
 		}
-)
+);

@@ -5,16 +5,19 @@ const Sequelize = require('sequelize');
 
 const app = express();
 const db = require('./db')(Sequelize);
-const repoController = require('./controllers/repo');
-
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
-
+const api = require('./controllers/api');
+const tempDataToDb = require('./tempDataToDb.helper');
 
 (async () => {
-	await db.sequelize.sync({force: false});
+	await db.sequelize.sync({force: true});
+	await tempDataToDb(db);
 
-	app.use('/repo', repoController(db));
+	app.use(bodyParser.json());
+
+	app.use('/api', api(db));
+
+	app.use((err, req, res, next) => res.status(err.status || 500).json(err.message));
+
 	app.listen(config.app.port, () => {
 		console.log('server listen port 9000');
 	});
