@@ -5,7 +5,9 @@ const {ability} = require('../authorization');
 module.exports = (db) => {
 	const router = Router({mergeParams: true});
 
-	router.use('/repo', ability(), repoController(db));
+	router.use(ability());
+	router.use('/repo', repoController(db));
+	router.get('/ability', (req, res) => res.json({rules: req.ability.rules}));
 
 	return router
 };

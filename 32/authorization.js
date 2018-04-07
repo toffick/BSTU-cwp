@@ -5,8 +5,6 @@ module.exports.ability = () =>
 			const {rules, can, cannot} = AbilityBuilder.extract();
 
 			const {name, role} = req.query || 'anon';
-			//херота
-			const {repoId} = req.params;
 
 			if (role === 'anon') {
 				can('read', 'commit');
@@ -17,8 +15,7 @@ module.exports.ability = () =>
 				can('read', ['repo', 'commit']);
 				can('create', 'repo');
 				can('update', 'repo', {author: name});
-				can('create', 'commit', {repoId});
-				// can('create', 'commit', {author: name}); // TODO commit should associate with parent repo for creating and updating
+				can(['update','create'], 'commit');
 			}
 
 			if (role === 'moderator') {
@@ -37,7 +34,7 @@ module.exports.checkAuth = (ability, action, obj) => {
 			access: false,
 			error:
 					{
-						message: `Unauthorized access for. Action ${action} on item ${obj._modelOptions.name.singular}`,
+						message: `Unauthorized access. Action ${action} on item ${obj._modelOptions.name.singular}`,
 						status: 403
 					}
 		};

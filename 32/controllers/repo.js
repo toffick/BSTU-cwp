@@ -1,13 +1,17 @@
 const {Router} = require('express');
 const commitController = require('./commit');
 const {checkAuth} = require('../authorization');
-const {ability} = require('../authorization');
 
-// сука, либа странная, заебся думать, как это припилить
 module.exports = (db) => {
 	const router = Router({mergeParams: true});
 
 	router.get('/', async (req, res, next) => {
+		const authRes = checkAuth(req.ability, 'read', 'repo');
+		if (!authRes.access) {
+			next(authRes.error);
+			return;
+		}
+
 		res.json(await db.Repo.findAll());
 	});
 
@@ -24,7 +28,7 @@ module.exports = (db) => {
 	});
 
 	router.post('/', async (req, res, next) => {
-		const item = await db.Repo.create(req.body);
+		const item = await db.Repo.build(req.body);
 
 		const authRes = checkAuth(req.ability, 'create', item);
 		if (!authRes.access) {
@@ -32,6 +36,7 @@ module.exports = (db) => {
 			return;
 		}
 
+		await item.save();
 		res.json(item);
 	});
 
@@ -44,16 +49,14 @@ module.exports = (db) => {
 			return;
 		}
 
-		const changedItem = await item.update(req.body);
-
-		res.json(changedItem);
+		res.json(await item.update(req.body));
 	});
 
 	router.delete('/:repoId', async (req, res, next) => {
 		const item = await db.Repo.findById(req.params.repoId);
 
 		const authRes = checkAuth(req.ability, 'delete', item);
-		if (!authRes.access) {
+		if (!item || !authRes.access) {
 			next(authRes.error);
 			return;
 		}
@@ -61,7 +64,7 @@ module.exports = (db) => {
 		res.json(await item.destroy());
 	});
 
-	router.use('/:repoId/commit', ability(), commitController(db));
+	router.use('/:repoId/commit', commitController(db));
 
 	return router;
 };
