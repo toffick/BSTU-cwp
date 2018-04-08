@@ -1,0 +1,20 @@
+{
+  "name": "cwp-33-pm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toffick/cwp-33-pm.git"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.3",
+    "pm2": "^2.10.2",
+    "siege": "^0.2.0",
+    "uuid": "^3.2.1"
+  }
+}
