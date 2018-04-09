@@ -1,0 +1,46 @@
+[
+  {
+    "message": "Eeee malishka",
+    "publishedOn": 1520000000000
+  },
+  {
+    "message": " String based operators are now deprecated.",
+    "publishedOn": 1520111111111
+  },
+  {
+    "message": "Please use Symbol based operators for better security",
+    "publishedOn": 1520555555555
+  },
+  {
+    "message": "Read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#op",
+    "publishedOn": 1520222222222
+  },
+  {
+    "message": "Завершить выполнение пакетного файла [Y(да)/N(нет)]?",
+    "publishedOn": 1520999999999
+  },
+  {
+    "message": "This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise    which was not handled with .catch",
+    "publishedOn": 1520777777777
+  },
+  {
+    "message": "Unhandled promise rejections are deprecated",
+    "publishedOn": 1520666668888
+  },
+  {
+    "message": "1 января проснулась в Малорите. Что происходит?",
+    "publishedOn": 1520666668888
+  },
+  {
+    "message": "Я поела",
+    "publishedOn": 1520665436666
+  },
+  {
+    "message": "Ща бы в тайгу ",
+    "publishedOn": 1520665874569
+  },
+  {
+    "message": "Ученые выяснили причину болей в коленях. Стоит всего на ночь выпить...",
+    "publishedOn": 1599965874569
+  }
+]
