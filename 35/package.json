@@ -11,6 +11,8 @@
   "dependencies": {
     "sequelize": "^4.23.4",
     "express": "^4.16.2",
-    "body-parser": "latest"
+    "body-parser": "latest",
+    "config": "^1.30.0",
+    "mysql2": "^1.5.3"
   }
 }
