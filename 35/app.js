@@ -8,12 +8,29 @@ const db = require('./db')(Sequelize, config);
 
 const app = express();
 
-// Mounting
-app.use(express.static('public'));
-app.use(bodyParser.json());
+app.get('/', async (req, res,) => {
+	res.json(await db.Task.findAll());
+});
+
+app.post('/', async (req, res,) => {
+	let response = { error: null };
+
+	if (Math.random() < 0.5) {
+		response.error = 'adding error';
+		res.json(response);
+		return;
+	}
+
+	response.result = await db.Task.create(req.body);
+	res.json(response);
+});
 
 (async function () {
-	db.sequelize.sync({force: true});
+	await db.sequelize.sync({ force: true });
+
+	app.use(express.static('public'));
+	app.use(bodyParser.json());
+
 
 	app.listen(config.app.port, () => console.log('Server running'));
 })();

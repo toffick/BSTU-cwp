@@ -1,5 +1,6 @@
 body {
     font-family: monospace;
+    padding: 5% 0 0 45%;
 }
 
 .todo__title {

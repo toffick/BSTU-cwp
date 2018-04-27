@@ -1,6 +1,6 @@
-const repo = require('./repo');
+const task = require('./task');
 
 module.exports = {
-	repo
+	task
 };
 
