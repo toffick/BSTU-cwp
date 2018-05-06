@@ -25,7 +25,7 @@ app.post('/tasks', async (req, res,) => {
 		const task = { ...req.body.task, text: req.body.task.text.toString() };
 		response.result = await db.Task.create(task);
 	}
-	setTimeout(() => res.json(response), Math.random() * (5000 - 100) + 100);
+	setTimeout(() => res.json(response), Math.random() * (2500 - 100) + 100);
 });
 
 app.put('/tasks/:id', async (req, res) => {

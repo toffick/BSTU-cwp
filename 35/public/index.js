@@ -83,38 +83,57 @@ class NavModel {
 	}
 }
 
+class NotificationsModel {
+	constructor() {
+		this.closeTimeout = 5000;
+		this.notifications = [];
+	}
+
+	getNotifications() {
+		return this.notifications;
+	}
+
+	push(task, error, cb) {
+		const timerId = setTimeout(() => {
+			this.notifications = this.notifications.filter(item => item.task.id !== task.id);
+			cb()
+		}, this.closeTimeout);
+
+		this.notifications.push({ task, timerId, error });
+	}
+}
+
 const todoModel = new ToDoModel();
 const navModel = new NavModel();
+const notificationModel = new NotificationsModel();
 
 class Notifications extends React.Component {
 	render() {
 		return (
-			<div className='popup'>
-				<div className='popup_inner'>
-					<h1>{this.props.text}</h1>
-					<button onClick={this.props.complete}>Yes</button>
-					<button onClick={this.props.closePopup}>No</button>
-				</div>
+			<div className='notifications_container'>
+				{this.props.notifications.map(item => (
+					<Notification notification={item}/>))}
 			</div>
 		);
 	}
 }
 
-class Notification extends React.Component {
+class Notification extends React.PureComponent {
 	render() {
-		return (
-			<div className='popup'>
-				<div className='popup_inner'>
-					<h1>{this.props.text}</h1>
-					<button onClick={this.props.complete}>Yes</button>
-					<button onClick={this.props.closePopup}>No</button>
+		const { task, error } = this.props.notification;
+		return error ?
+			(<div className='notification_item reject_add'>
+				The task {task.id}({task.text.slice(0,10)}...) was not added to the task list
+			</div>)
+			:
+			(<div className='notification_item success_add'>
+					The task {task.id}({task.text.slice(0,10)}...) was successfully added to the list
 				</div>
-			</div>
-		);
+			);
 	}
 }
 
-class Popup extends React.Component {
+class Popup extends React.PureComponent {
 	render() {
 		return (
 			<div className='popup'>
@@ -379,7 +398,8 @@ class ToDo extends React.Component {
 			completed: 0,
 			links: [],
 			remains: 0,
-			tasks: []
+			tasks: [],
+			notifications: []
 		};
 	};
 
@@ -394,26 +414,28 @@ class ToDo extends React.Component {
 
 	render() {
 		return (
-			<div className="todo">
-				<div className="todo__title">React ToDo</div>
-				<Nav links={this.state.links} activeLink={this.state.activeLink}
-					 navigate={this._navigate}/>
-				<ToDoSummary remains={this.state.remains} completed={this.state.completed}/>
-				<ToDoList tasks={this.state.tasks} areAllComplete={this.state.areAllCompleted}
-						  toggleItem={this._toggleItem} toggleAll={this._toogleAll}
-						  removeItem={this._removeItem} updateItem={this._updateItem}
-				/>
-				<ToDoForm addItem={this._addItem}/>
-				<ToDoClear removeCompleted={this._removeCompleted}/>
-				<button onClick={() => notify({ text: 'Spawn something' })}>
-					Go, go!
-				</button>
+			<div className="global">
+				<div className="todo">
+					<div className="todo__title">React ToDo</div>
+					<Nav links={this.state.links} activeLink={this.state.activeLink}
+						 navigate={this._navigate}/>
+					<ToDoSummary remains={this.state.remains} completed={this.state.completed}/>
+					<ToDoList tasks={this.state.tasks} areAllComplete={this.state.areAllCompleted}
+							  toggleItem={this._toggleItem} toggleAll={this._toogleAll}
+							  removeItem={this._removeItem} updateItem={this._updateItem}
+					/>
+					<ToDoForm addItem={this._addItem}/>
+					<ToDoClear removeCompleted={this._removeCompleted}/>
+				</div>
+				<div className="notifications">
+					<Notifications notifications={this.state.notifications}/>
+				</div>
 			</div>
+
 		);
 	}
 
 	_getState() {
-		console.log(window);
 		const state = {
 			remains: todoModel.getActiveCount(),
 			completed: todoModel.getCompletedCount(),
@@ -432,11 +454,12 @@ class ToDo extends React.Component {
 			state.tasks = todoModel.getActiveItems();
 		}
 
+		state.notifications = notificationModel.getNotifications();
+
 		return state;
 	}
 
 	_rerender() {
-		console.log(this._getState());
 		this.setState(this._getState());
 	}
 
@@ -469,8 +492,12 @@ class ToDo extends React.Component {
 		axios.post('/tasks', { task }).then(({ data }) => {
 			if (data.error) {
 				todoModel.removeItem(data.id);
-				this._rerender();
 			}
+
+			notificationModel.push(task, data.error, () => {
+				this._rerender();
+			});
+			this._rerender();
 		});
 	}
 
