@@ -4,10 +4,6 @@ class ToDoModel {
 	}
 
 	getItems() {
-		axios.get('/')
-			.then(function (response) {
-				console.log(response);
-			})
 		return this.list;
 	}
 
@@ -319,7 +315,23 @@ class ToDo extends React.Component {
 		this._removeCompleted = this._removeCompleted.bind(this);
 		this._navigate = this._navigate.bind(this);
 
-		this.state = this._getState();
+		this.state = {
+			activeLink: { title: "All" },
+			areAllCompleted: true,
+			completed: 0,
+			links: [],
+			remains: 0,
+			tasks: []
+		};
+	};
+
+
+	componentWillMount() {
+		axios.get('/tasks')
+			.then(({ data }) => {
+				todoModel.list = data;
+				this._rerender();
+			})
 	}
 
 	render() {
@@ -362,6 +374,7 @@ class ToDo extends React.Component {
 	}
 
 	_rerender() {
+		console.log(this._getState());
 		this.setState(this._getState());
 	}
 
@@ -380,9 +393,15 @@ class ToDo extends React.Component {
 		this._rerender();
 	}
 
-	_addItem(text) {
-		todoModel.addItem(text);
-		this._rerender();
+	async _addItem(text) {
+		const task = todoModel.addItem(text);
+		this.setState({ tasks: [...this.state.tasks, task] });
+
+		await
+			axios.post('/tasks', { task }).then(({ data }) => {
+				if (data.error) {
+				}
+			});
 	}
 
 	_updateItem(id, text) {
