@@ -20,11 +20,39 @@ app.post('/tasks', async (req, res,) => {
 
 	if (Math.random() < 0.5) {
 		response.error = 'adding error';
+		response.taskId = req.body.task.id;
 	} else {
-		response.result = await db.Task.create(req.body.task);
+		const task = { ...req.body.task, text: req.body.task.text.toString() };
+		response.result = await db.Task.create(task);
 	}
+	setTimeout(() => res.json(response), Math.random() * (5000 - 100) + 100);
+});
 
-	setTimeout(() => res.json(response), 500);
+app.put('/tasks/:id', async (req, res) => {
+	const { text } = req.body;
+
+	res.json(await db.Task.update({ text }, { where: { id: req.params.id }, limit: 1 }));
+});
+
+app.delete('/tasks/:id', async (req, res) => {
+	res.json(await db.Task.destroy({ where: { id: req.params.id } }));
+});
+
+app.post('/toggle-all', async (req, res) => {
+	const { areAllCompleted } = req.body;
+
+	res.json(await db.Task.update({ completed: areAllCompleted }, { where: {} }));
+});
+
+app.post('/toggle-item', async (req, res) => {
+	const { id } = req.body;
+	const item = await db.Task.findById(+id);
+
+	res.json(await item.update({ completed: !item.completed }));
+});
+
+app.post('/clear', async (req, res) => {
+	res.json(await db.Task.destroy({ where: { completed: true } }));
 });
 
 (async function () {

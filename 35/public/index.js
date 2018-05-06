@@ -379,39 +379,51 @@ class ToDo extends React.Component {
 	}
 
 	_toggleItem(id) {
-		todoModel.toggleItem(id);
-		this._rerender();
+		axios.post('/toggle-item', { id }).then(() => {
+			todoModel.toggleItem(id);
+			this._rerender();
+		});
 	}
 
 	_toogleAll() {
-		todoModel.switchAllTo(!this.state.areAllCompleted);
-		this._rerender();
+		axios.post('/toggle-all', { areAllCompleted: !this.state.areAllCompleted }).then(() => {
+			todoModel.switchAllTo(!this.state.areAllCompleted);
+			this._rerender();
+		});
 	}
 
 	_removeItem(id) {
-		todoModel.removeItem(id);
-		this._rerender();
+		axios.delete(`/tasks/${id}`).then(() => {
+			todoModel.removeItem(id);
+			this._rerender();
+		});
 	}
 
-	async _addItem(text) {
+	_addItem(text) {
+		//  optimistic UI updates
 		const task = todoModel.addItem(text);
-		this.setState({ tasks: [...this.state.tasks, task] });
+		this._rerender();
 
-		await
-			axios.post('/tasks', { task }).then(({ data }) => {
-				if (data.error) {
-				}
-			});
+		axios.post('/tasks', { task }).then(({ data }) => {
+			if (data.error) {
+				todoModel.removeItem(data.id);
+				this._rerender();
+			}
+		});
 	}
 
 	_updateItem(id, text) {
-		todoModel.updateItem(id, text);
-		this._rerender();
+		axios.put(`/tasks/${id}`, { text }).then(() => {
+			todoModel.updateItem(id, text);
+			this._rerender();
+		});
 	}
 
 	_removeCompleted() {
-		todoModel.removeCompleted();
-		this._rerender();
+		axios.post('/clear', {}).then(() => {
+			todoModel.removeCompleted();
+			this._rerender();
+		});
 	}
 
 	_navigate(link) {
