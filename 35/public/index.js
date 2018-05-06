@@ -86,7 +86,49 @@ class NavModel {
 const todoModel = new ToDoModel();
 const navModel = new NavModel();
 
-class ToDoSummary extends React.Component {
+class Notifications extends React.Component {
+	render() {
+		return (
+			<div className='popup'>
+				<div className='popup_inner'>
+					<h1>{this.props.text}</h1>
+					<button onClick={this.props.complete}>Yes</button>
+					<button onClick={this.props.closePopup}>No</button>
+				</div>
+			</div>
+		);
+	}
+}
+
+class Notification extends React.Component {
+	render() {
+		return (
+			<div className='popup'>
+				<div className='popup_inner'>
+					<h1>{this.props.text}</h1>
+					<button onClick={this.props.complete}>Yes</button>
+					<button onClick={this.props.closePopup}>No</button>
+				</div>
+			</div>
+		);
+	}
+}
+
+class Popup extends React.Component {
+	render() {
+		return (
+			<div className='popup'>
+				<div className='popup_inner'>
+					<h1>{this.props.text}</h1>
+					<button onClick={this.props.complete}>Yes</button>
+					<button onClick={this.props.closePopup}>No</button>
+				</div>
+			</div>
+		);
+	}
+}
+
+class ToDoSummary extends React.PureComponent {
 	render() {
 		return (
 			<div className="todo-info">
@@ -102,7 +144,7 @@ class ToDoSummary extends React.Component {
 	}
 }
 
-class ToDoTextInput extends React.Component {
+class ToDoTextInput extends React.PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -151,10 +193,13 @@ class ToDoItem extends React.Component {
 		this._save = this._save.bind(this);
 		this._toggleItem = this._toggleItem.bind(this);
 		this._removeItem = this._removeItem.bind(this);
+		this._togglePopup = this._togglePopup.bind(this);
 
 		this.state = {
-			isEditing: false
+			isEditing: false,
+			popup: false,
 		};
+
 	}
 
 	render() {
@@ -175,10 +220,17 @@ class ToDoItem extends React.Component {
 					   checked={this.props.task.completed}
 					   onChange={this._toggleItem}/>
 				<span className="todo__destroy"
-					  onClick={this._removeItem}>-</span>
+					  onClick={this._togglePopup}>-</span>
 				{' '}
 				{text}
-
+				{this.state.popup ?
+					<Popup
+						text="Do you sure?"
+						complete={this._removeItem}
+						closePopup={this._togglePopup}
+					/>
+					: null
+				}
 			</div>
 		);
 	}
@@ -199,6 +251,11 @@ class ToDoItem extends React.Component {
 	_removeItem() {
 		this.props.removeItem(this.props.task.id);
 	}
+
+	_togglePopup() {
+
+		this.setState({ popup: !this.state.popup })
+	}
 }
 
 class ToDoList extends React.Component {
@@ -212,6 +269,7 @@ class ToDoList extends React.Component {
 				/>
 			);
 		});
+
 
 		return (
 			<div className="todo__list">
@@ -230,7 +288,7 @@ class ToDoList extends React.Component {
 	}
 }
 
-class ToDoForm extends React.Component {
+class ToDoForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -253,7 +311,7 @@ class ToDoForm extends React.Component {
 	}
 }
 
-class ToDoClear extends React.Component {
+class ToDoClear extends React.PureComponent {
 	render() {
 		return (
 			<div className="todo__clear"
@@ -264,7 +322,7 @@ class ToDoClear extends React.Component {
 	}
 }
 
-class NavItem extends React.Component {
+class NavItem extends React.PureComponent {
 	constructor(props) {
 		super(props);
 
@@ -284,7 +342,7 @@ class NavItem extends React.Component {
 	}
 }
 
-class Nav extends React.Component {
+class Nav extends React.PureComponent {
 	render() {
 		const items = this.props.links.map((link) => {
 			return (
@@ -347,11 +405,15 @@ class ToDo extends React.Component {
 				/>
 				<ToDoForm addItem={this._addItem}/>
 				<ToDoClear removeCompleted={this._removeCompleted}/>
+				<button onClick={() => notify({ text: 'Spawn something' })}>
+					Go, go!
+				</button>
 			</div>
 		);
 	}
 
 	_getState() {
+		console.log(window);
 		const state = {
 			remains: todoModel.getActiveCount(),
 			completed: todoModel.getCompletedCount(),

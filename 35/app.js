@@ -40,15 +40,17 @@ app.delete('/tasks/:id', async (req, res) => {
 
 app.post('/toggle-all', async (req, res) => {
 	const { areAllCompleted } = req.body;
-
 	res.json(await db.Task.update({ completed: areAllCompleted }, { where: {} }));
 });
 
 app.post('/toggle-item', async (req, res) => {
 	const { id } = req.body;
 	const item = await db.Task.findById(+id);
+	if (item)
+		res.json(await item.update({ completed: !item.completed }));
+	else
+		res.json({ success: false });
 
-	res.json(await item.update({ completed: !item.completed }));
 });
 
 app.post('/clear', async (req, res) => {
