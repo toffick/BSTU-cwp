@@ -1,9 +1,7 @@
 {
-  "app": {
-    "port": 9002
-  },
   "db": {
-    "name": "cwp-35",
+    "host": "localhost",
+    "name": "cwp-29",
     "user": "root",
     "pass": "root",
     "options": {
@@ -16,5 +14,6 @@
       },
       "logging": false
     }
-  }
+  },
+  "port": 9001
 }

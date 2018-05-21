@@ -1,18 +1,14 @@
 {
-  "app": {
-    "port": 9002
-  },
   "db": {
-    "name": "cwp-35",
+    "name": "tracking",
     "user": "root",
     "pass": "root",
     "options": {
       "dialect": "mysql",
       "host": "localhost",
       "define": {
-        "timestamps": false,
-        "paranoid": false,
-        "freezeTableName": true
+        "timestamps": true,
+        "paranoid": true
       },
       "logging": false
     }

@@ -1,9 +1,6 @@
 {
-  "app": {
-    "port": 9002
-  },
   "db": {
-    "name": "cwp-35",
+    "name": "world",
     "user": "root",
     "pass": "root",
     "options": {
