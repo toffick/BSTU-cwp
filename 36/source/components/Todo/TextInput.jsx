@@ -13,6 +13,7 @@ export default class ToDoTextInput extends React.PureComponent {
 		};
 	}
 
+
 	render() {
 		return (
 			<input className={this.props.className}

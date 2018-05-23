@@ -58,8 +58,10 @@ app.post('/clear', async (req, res) => {
 	res.json(await db.Task.destroy({ where: { completed: true } }));
 });
 
+app.use(express.static('public'));
+
 app.use((req, res) => {
-	res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 (async function () {
