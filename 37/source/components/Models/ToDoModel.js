@@ -48,7 +48,7 @@ export default class ToDoModel {
 
 	updateItem(id, text) {
 		let index = this.list.findIndex(x => x.id === id);
-		this.list = this.list.update(index, val=> ({...val, text}));
+		this.list = this.list.up+date(index, val=> ({...val, text}));
 	}
 
 	toggleItem(id) {

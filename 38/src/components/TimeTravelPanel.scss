@@ -1,0 +1,33 @@
+.time-panel__button {
+	display: inline-block;
+	width: 86px;
+	height: 35px;
+	line-height: 35px;
+	margin-right: 8px;
+	text-align: center;
+	background: #f44336;
+	color: #fff;
+	cursor: pointer;
+	text-transform: uppercase;
+
+	&:hover {
+		background: #EF5350;
+	}
+
+	&:active {
+		background: #E53935;
+	}
+
+	&_disabled{
+		background: gray;
+
+		&:hover {
+			background: #EF5350;
+		}
+
+		&:active {
+			background: #E53935;
+		}
+	}
+
+}

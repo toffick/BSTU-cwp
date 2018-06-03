@@ -1,0 +1,16 @@
+.point {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0px auto 30px auto;
+	padding: 20px 40px 20px 40px;
+	background: #bac5c0;
+	border-radius: 25px;
+	min-height: 64px;
+}
+
+.delete{
+	&:hover {
+		cursor: pointer;
+	}
+}

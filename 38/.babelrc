@@ -1,0 +1,18 @@
+{
+	"presets": [
+		"es2015",
+		"react",
+		"stage-0"
+	],
+	"plugins": [
+		"react-hot-loader/babel",
+		[
+			"transform-runtime",
+			{
+				"helpers": false,
+				"polyfill": false,
+				"moduleName": "babel-runtime"
+			}
+		]
+	]
+}

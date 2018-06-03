@@ -1,0 +1,10 @@
+**/certs/*
+**/migrations/*
+**/files/*
+**/logs/*
+node_modules
+**/*.eslintignore
+**/*.eslintrc
+**/*.projectile
+**/*.tern-project
+**/yarn.lock

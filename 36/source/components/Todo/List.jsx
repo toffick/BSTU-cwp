@@ -22,7 +22,7 @@ export default class ToDoList extends React.Component {
 						   checked={this.props.areAllComplete}
 						   onChange={this.props.toggleAll}/>
 					{' '}
-					Complete all
+					Complete asll
 				</div>
 
 				{items}
